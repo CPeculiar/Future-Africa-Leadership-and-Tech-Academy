@@ -1,6 +1,5 @@
 
 import { Toaster } from "@/components/ui/toaster";
-import { useLocation } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -10,6 +9,7 @@ import Index from "./pages/Index";
 import About from "./pages/About";
 import Programmes from "./pages/Programmes";
 import Events from "./pages/Events";
+import EventDetail from "./pages/EventDetail";
 import Contact from "./pages/Contact";
 import LeadershipApplication from "./pages/LeadershipApplication";
 import TechApplication from "./pages/TechApplication";
@@ -32,6 +32,7 @@ const App = () => (
               <Route path="/about" element={<About />} />
               <Route path="/programmes" element={<Programmes />} />
               <Route path="/events" element={<Events />} />
+              <Route path="/events/:id" element={<EventDetail />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/apply/leadership" element={<LeadershipApplication />} />
               <Route path="/apply/tech" element={<TechApplication />} />

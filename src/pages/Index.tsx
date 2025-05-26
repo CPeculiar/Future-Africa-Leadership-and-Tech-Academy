@@ -42,7 +42,7 @@ const Index = () => {
                     <ArrowRight className="ml-2 w-5 h-5" />
                   </Link>
                 </Button>
-                <Button asChild size="lg" variant="outline" className="border-2 border-white/30 text-white hover:bg-white/10 font-semibold text-lg px-8 py-4 rounded-full backdrop-blur-sm">
+                <Button asChild size="lg" className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold text-lg px-8 py-4 rounded-full backdrop-blur-sm">
                   <Link to="/apply/tech">Join Tech Academy</Link>
                 </Button>
               </div>
@@ -82,7 +82,7 @@ const Index = () => {
       </section>
 
       {/* Countdown Section - Reduced Size */}
-      <section className="py-8 bg-gradient-to-r from-slate-50 to-purple-50">
+      <section className="py-4 bg-gradient-to-r from-slate-50 to-purple-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <CountdownTimer />
         </div>

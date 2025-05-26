@@ -17,15 +17,21 @@ const Header = () => {
 
   const isActive = (path: string) => location.pathname === path;
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-green-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">F</span>
-            </div>
+          <Link to="/" className="flex items-center space-x-2" onClick={scrollToTop}>
+            <img 
+              src="/src/assets/images/FALATA.jpg" 
+              alt="FALATA Logo" 
+              className="w-12 h-12 rounded-lg object-cover"
+            />
             <div className="hidden sm:block">
               <h1 className="text-xl font-bold text-gray-900">FALATA</h1>
               <p className="text-xs text-gray-600">Future Africa Leadership & Tech Academy</p>
@@ -38,8 +44,9 @@ const Header = () => {
               <Link
                 key={item.name}
                 to={item.path}
-                className={`text-sm font-medium transition-colors hover:text-blue-600 ${
-                  isActive(item.path) ? 'text-blue-600' : 'text-gray-700'
+                onClick={scrollToTop}
+                className={`text-sm font-medium transition-colors hover:text-purple-600 ${
+                  isActive(item.path) ? 'text-purple-600' : 'text-gray-700'
                 }`}
               >
                 {item.name}
@@ -70,10 +77,13 @@ const Header = () => {
                 <Link
                   key={item.name}
                   to={item.path}
-                  className={`block text-sm font-medium transition-colors hover:text-blue-600 ${
-                    isActive(item.path) ? 'text-blue-600' : 'text-gray-700'
+                  className={`block text-sm font-medium transition-colors hover:text-purple-600 ${
+                    isActive(item.path) ? 'text-purple-600' : 'text-gray-700'
                   }`}
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    scrollToTop();
+                  }}
                 >
                   {item.name}
                 </Link>
