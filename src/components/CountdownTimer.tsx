@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from 'react';
+import { Clock } from 'lucide-react';
 
 const CountdownTimer = () => {
   const [timeLeft, setTimeLeft] = useState({
@@ -35,23 +36,26 @@ const CountdownTimer = () => {
   }, []);
 
   return (
-    <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white py-8 px-6 rounded-lg text-center">
-      <h3 className="text-2xl font-bold mb-2">
-        Admission for the June 2025 Cohort is closing soon. Apply Now!
-      </h3>
+    <div className="bg-gradient-to-r from-orange-500 to-red-500 text-white py-6 px-8 rounded-2xl shadow-xl">
+      <div className="flex items-center justify-center mb-4">
+        <Clock className="w-5 h-5 mr-2" />
+        <h3 className="text-lg font-bold text-center">
+          Admission for June 2025 Cohort is closing soon!
+        </h3>
+      </div>
       
-      <div className="flex justify-center items-center space-x-8 mt-6">
-        <div className="text-center">
-          <div className="text-4xl font-bold">{timeLeft.days.toString().padStart(2, '0')}</div>
-          <div className="text-sm uppercase tracking-wide">Days</div>
+      <div className="flex justify-center items-center space-x-6">
+        <div className="text-center bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
+          <div className="text-2xl font-bold">{timeLeft.days.toString().padStart(2, '0')}</div>
+          <div className="text-xs uppercase tracking-wide opacity-90">Days</div>
         </div>
-        <div className="text-center">
-          <div className="text-4xl font-bold">{timeLeft.hours.toString().padStart(2, '0')}</div>
-          <div className="text-sm uppercase tracking-wide">Hrs</div>
+        <div className="text-center bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
+          <div className="text-2xl font-bold">{timeLeft.hours.toString().padStart(2, '0')}</div>
+          <div className="text-xs uppercase tracking-wide opacity-90">Hrs</div>
         </div>
-        <div className="text-center">
-          <div className="text-4xl font-bold">{timeLeft.minutes.toString().padStart(2, '0')}</div>
-          <div className="text-sm uppercase tracking-wide">Mins</div>
+        <div className="text-center bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
+          <div className="text-2xl font-bold">{timeLeft.minutes.toString().padStart(2, '0')}</div>
+          <div className="text-xs uppercase tracking-wide opacity-90">Mins</div>
         </div>
       </div>
     </div>
