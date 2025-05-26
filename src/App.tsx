@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -14,6 +13,7 @@ import Contact from "./pages/Contact";
 import LeadershipApplication from "./pages/LeadershipApplication";
 import TechApplication from "./pages/TechApplication";
 import Payment from "./pages/Payment";
+import PaymentSuccess from "./pages/PaymentSuccess";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,7 +26,7 @@ const App = () => (
       <BrowserRouter>
         <div className="min-h-screen bg-white">
           <Header />
-          <main className="pt-20">
+          <main className="pt-16 sm:pt-20">
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/about" element={<About />} />
@@ -37,6 +37,7 @@ const App = () => (
               <Route path="/apply/leadership" element={<LeadershipApplication />} />
               <Route path="/apply/tech" element={<TechApplication />} />
               <Route path="/payment" element={<Payment />} />
+              <Route path="/payment-success" element={<PaymentSuccess />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>
