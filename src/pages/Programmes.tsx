@@ -17,7 +17,7 @@ const Programmes = () => {
         </div>
       </section>
 
-      {/* Program Overview Section */}
+      {/* Program Overview Section - Centered */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Program Overview</h2>
@@ -46,17 +46,17 @@ const Programmes = () => {
               <img 
                 src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=300&fit=crop" 
                 alt="Leadership training" 
-                className="w-full h-64 object-cover rounded-2xl shadow-lg"
+                className="w-full h-48 sm:h-56 md:h-64 object-cover rounded-2xl shadow-lg"
               />
 
               <div className="space-y-6">
-                <p className="text-lg text-gray-600 leading-relaxed">
+                <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
                   Develop visionary leadership skills that drive transformation across Africa's diverse sectors and communities. 
                   Our Leadership Academy prepares you to lead with confidence, integrity, and impact.
                 </p>
 
-                <div className="bg-purple-50 p-6 rounded-xl">
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">Core Tracks</h3>
+                <div className="bg-purple-50 p-4 sm:p-6 rounded-xl">
+                  <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4">Core Tracks</h3>
                   <div className="grid grid-cols-1 gap-3">
                     {[
                       'Strategic Leadership & Vision Development',
@@ -66,22 +66,22 @@ const Programmes = () => {
                       'Emotional Intelligence & Decision Making',
                       'Change Management & Organizational Development'
                     ].map((item, index) => (
-                      <div key={index} className="flex items-center">
-                        <Star className="w-4 h-4 text-purple-600 mr-3" />
-                        <span className="text-gray-700">{item}</span>
+                      <div key={index} className="flex items-start">
+                        <Star className="w-4 h-4 text-purple-600 mr-3 mt-0.5 flex-shrink-0" />
+                        <span className="text-sm sm:text-base text-gray-700">{item}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-6 text-center">
-                  <div className="bg-white p-4 rounded-lg shadow-sm border">
-                    <div className="text-2xl font-bold text-purple-600">12 Weeks</div>
-                    <div className="text-sm text-gray-600">Program Duration</div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 text-center">
+                  <div className="bg-white p-3 sm:p-4 rounded-lg shadow-sm border">
+                    <div className="text-xl sm:text-2xl font-bold text-purple-600">12 Weeks</div>
+                    <div className="text-xs sm:text-sm text-gray-600">Program Duration</div>
                   </div>
-                  <div className="bg-white p-4 rounded-lg shadow-sm border">
-                    <div className="text-2xl font-bold text-purple-600">Certificate</div>
-                    <div className="text-sm text-gray-600">Upon Completion</div>
+                  <div className="bg-white p-3 sm:p-4 rounded-lg shadow-sm border">
+                    <div className="text-xl sm:text-2xl font-bold text-purple-600">Certificate</div>
+                    <div className="text-xs sm:text-sm text-gray-600">Upon Completion</div>
                   </div>
                 </div>
 
@@ -104,17 +104,17 @@ const Programmes = () => {
               <img 
                 src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=600&h=300&fit=crop" 
                 alt="Tech training" 
-                className="w-full h-64 object-cover rounded-2xl shadow-lg"
+                className="w-full h-48 sm:h-56 md:h-64 object-cover rounded-2xl shadow-lg"
               />
 
               <div className="space-y-6">
-                <p className="text-lg text-gray-600 leading-relaxed">
+                <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
                   Master cutting-edge technologies and digital innovation skills for the modern tech ecosystem. 
                   Our Tech Academy equips you with practical, in-demand skills for the digital future.
                 </p>
 
-                <div className="bg-emerald-50 p-6 rounded-xl">
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">Core Tracks</h3>
+                <div className="bg-emerald-50 p-4 sm:p-6 rounded-xl">
+                  <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4">Core Tracks</h3>
                   <div className="grid grid-cols-1 gap-3">
                     {[
                       'Frontend Web Development (React, HTML, CSS)',
@@ -124,22 +124,26 @@ const Programmes = () => {
                       'Cybersecurity Fundamentals',
                       'Cloud Computing & DevOps'
                     ].map((item, index) => (
-                      <div key={index} className="flex items-center">
-                        <Star className="w-4 h-4 text-emerald-600 mr-3" />
-                        <span className="text-gray-700">{item}</span>
+                      <div key={index} className="flex items-start">
+                        <Star className="w-4 h-4 text-emerald-600 mr-3 mt-0.5 flex-shrink-0" />
+                        <span className="text-sm sm:text-base text-gray-700">{item}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-6 text-center">
-                  <div className="bg-white p-4 rounded-lg shadow-sm border">
-                    <div className="text-2xl font-bold text-emerald-600">16 Weeks</div>
-                    <div className="text-sm text-gray-600">Program Duration</div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+                  <div className="bg-white p-3 sm:p-4 rounded-lg shadow-sm border">
+                    <div className="text-lg sm:text-xl lg:text-2xl font-bold text-emerald-600">16 Weeks</div>
+                    <div className="text-xs sm:text-sm text-gray-600">Duration</div>
                   </div>
-                  <div className="bg-white p-4 rounded-lg shadow-sm border">
-                    <div className="text-2xl font-bold text-emerald-600">₦10,000</div>
-                    <div className="text-sm text-gray-600">Training Fee</div>
+                  <div className="bg-white p-3 sm:p-4 rounded-lg shadow-sm border">
+                    <div className="text-lg sm:text-xl lg:text-2xl font-bold text-emerald-600">₦10,000</div>
+                    <div className="text-xs sm:text-sm text-gray-600">Training Fee</div>
+                  </div>
+                  <div className="bg-white p-3 sm:p-4 rounded-lg shadow-sm border">
+                    <div className="text-lg sm:text-xl lg:text-2xl font-bold text-emerald-600">Certificate</div>
+                    <div className="text-xs sm:text-sm text-gray-600">Upon Completion</div>
                   </div>
                 </div>
 

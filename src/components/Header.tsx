@@ -68,34 +68,39 @@ const Header = () => {
             aria-label="Toggle menu"
           >
             <div className="w-6 h-6 flex flex-col justify-center items-center">
-              <span className={`bg-gray-600 block h-0.5 w-6 rounded-sm transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`}></span>
-              <span className={`bg-gray-600 block h-0.5 w-6 rounded-sm transition-all duration-300 my-0.5 ${isMenuOpen ? 'opacity-0' : ''}`}></span>
-              <span className={`bg-gray-600 block h-0.5 w-6 rounded-sm transition-all duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></span>
+              <span className={`bg-gray-600 block h-0.5 w-6 rounded-sm transition-all duration-500 ease-in-out ${isMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`}></span>
+              <span className={`bg-gray-600 block h-0.5 w-6 rounded-sm transition-all duration-500 ease-in-out my-0.5 ${isMenuOpen ? 'opacity-0' : ''}`}></span>
+              <span className={`bg-gray-600 block h-0.5 w-6 rounded-sm transition-all duration-500 ease-in-out ${isMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></span>
             </div>
           </Button>
         </div>
 
-        {/* Mobile Navigation with smooth transitions */}
-        <div className={`md:hidden absolute top-full left-0 right-0 bg-white border-b border-gray-200 shadow-lg transition-all duration-300 ease-in-out ${
+        {/* Mobile Navigation with enhanced smooth transitions */}
+        <div className={`md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-xl transition-all duration-700 ease-in-out ${
           isMenuOpen 
-            ? 'opacity-100 max-h-96 translate-y-0' 
-            : 'opacity-0 max-h-0 -translate-y-2 pointer-events-none'
+            ? 'opacity-100 max-h-96 translate-y-0 visible' 
+            : 'opacity-0 max-h-0 -translate-y-4 invisible'
         } overflow-hidden`}>
-          <nav className="px-4 py-4">
-            <div className="space-y-3">
+          <nav className="px-4 py-6">
+            <div className="space-y-4">
               {navItems.map((item, index) => (
                 <Link
                   key={item.name}
                   to={item.path}
-                  className={`block text-sm font-medium transition-all duration-300 hover:text-purple-600 hover:translate-x-2 py-2 px-3 rounded-lg hover:bg-purple-50 ${
-                    isActive(item.path) ? 'text-purple-600 bg-purple-50' : 'text-gray-700'
+                  className={`block text-base font-medium transition-all duration-700 ease-in-out hover:text-purple-600 hover:translate-x-3 py-3 px-4 rounded-xl hover:bg-purple-50 transform ${
+                    isActive(item.path) ? 'text-purple-600 bg-purple-50 translate-x-2' : 'text-gray-700'
+                  } ${isMenuOpen 
+                    ? 'opacity-100 translate-y-0' 
+                    : 'opacity-0 translate-y-4'
                   }`}
                   style={{
-                    transitionDelay: isMenuOpen ? `${index * 50}ms` : '0ms'
+                    transitionDelay: isMenuOpen ? `${index * 100 + 200}ms` : `${(navItems.length - index) * 50}ms`
                   }}
                   onClick={handleLinkClick}
                 >
-                  {item.name}
+                  <span className="inline-block transition-transform duration-300 hover:scale-105">
+                    {item.name}
+                  </span>
                 </Link>
               ))}
             </div>
