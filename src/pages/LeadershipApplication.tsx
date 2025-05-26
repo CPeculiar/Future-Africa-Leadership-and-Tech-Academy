@@ -1,5 +1,7 @@
 
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+import { submitFormApplication } from "../services/firestore";
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -35,6 +37,12 @@ const LeadershipApplication = () => {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState({});
+  const [formErrors, setFormErrors] = useState({});
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const navigate = useNavigate();
+
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -42,14 +50,43 @@ const LeadershipApplication = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+     setFormErrors({});
     setIsSubmitting(true);
     
     try {
       console.log('Leadership application submitted:', formData);
-      // Handle form submission logic here
-      alert('Application submitted successfully!');
+       const applicationId = await submitFormApplication(formData);
+        setShowSuccessModal(true);
+      // alert('Application submitted successfully!');
+        setFormData({
+          fullName: '',
+          email: '',
+          phone: '',
+          dateOfBirth: '',
+          gender: '',
+          nationality: '',
+          stateOfOrigin: '',
+          currentAddress: '',
+          occupation: '',
+          organization: '',
+          educationLevel: '',
+          fieldOfStudy: '',
+          institution: '',
+          graduationYear: '',
+          leadershipExperience: '',
+          motivationLetter: '',
+          expectations: '',
+          commitment: '',
+          referenceOne: '',
+          referenceTwo: '',
+          emergencyContact: '',
+          medicalConditions: '',
+          dietaryRestrictions: '',
+          paymentOption: ''
+        });
     } catch (error) {
       console.error('Error submitting application:', error);
+      setFormErrors({ form: `Registration failed: ${error.message}` });
       alert('Error submitting application. Please try again.');
     } finally {
       setIsSubmitting(false);
