@@ -1,14 +1,14 @@
+
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { submitTechApplication } from "../services/firestore";
-import { doc, setDoc } from "firebase/firestore";
-import { auth, db, storage } from "../services/firebaseConfig";
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { CheckCircle } from 'lucide-react';
 
 const TechApplication = () => {
   const [formData, setFormData] = useState({
@@ -22,22 +22,18 @@ const TechApplication = () => {
     educationLevel: '',
     fieldOfStudy: '',
     institution: '',
-    programmingExperience: '',
+    computerLiteracy: '',
     techInterests: '',
     motivationLetter: '',
-    projectExperience: '',
     careerGoals: '',
     availableTime: '',
     computerAccess: '',
     internetConnection: '',
-    emergencyContact: '',
+    hearAbout: '',
     paymentOption: ''
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState({});
-  const [formErrors, setFormErrors] = useState({});
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const navigate = useNavigate();
 
@@ -47,39 +43,49 @@ const TechApplication = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-     setFormErrors({});
     setIsSubmitting(true);
     
     try {
-      console.log('Tech application submitting:', formData);
-      const applicationId = await submitTechApplication(formData);
-      setShowSuccessModal(true);
-      // alert('Application submitted successfully!');
-      setFormData({
-        fullName: '',
-        email: '',
-        phone: '',
-        dateOfBirth: '',
-        gender: '',
-        nationality: '',
-        currentAddress: '',
-        educationLevel: '',
-        fieldOfStudy: '',
-        institution: '',
-        programmingExperience: '',
-        techInterests: '',
-        motivationLetter: '',
-        projectExperience: '',
-        careerGoals: '',
-        availableTime: '',
-        computerAccess: '',
-        internetConnection: '',
-        emergencyContact: '',
-        paymentOption: ''
+      if (formData.paymentOption === 'pay-now') {
+        // Redirect to payment page with form data
+        const params = new URLSearchParams({
+          name: formData.fullName,
+          email: formData.email,
+          phone: formData.phone,
+          amount: '10000',
+          currency: 'NGN'
         });
+        navigate(`/payment?${params.toString()}`);
+      } else {
+        console.log('Tech application submitting:', formData);
+        await submitTechApplication(formData);
+        setShowSuccessModal(true);
+        
+        // Clear form
+        setFormData({
+          fullName: '',
+          email: '',
+          phone: '',
+          dateOfBirth: '',
+          gender: '',
+          nationality: '',
+          currentAddress: '',
+          educationLevel: '',
+          fieldOfStudy: '',
+          institution: '',
+          computerLiteracy: '',
+          techInterests: '',
+          motivationLetter: '',
+          careerGoals: '',
+          availableTime: '',
+          computerAccess: '',
+          internetConnection: '',
+          hearAbout: '',
+          paymentOption: ''
+        });
+      }
     } catch (error) {
       console.error('Error submitting application:', error);
-      setFormErrors({ form: `Registration failed: ${error.message}` });
       alert('Error submitting application. Please try again.');
     } finally {
       setIsSubmitting(false);
@@ -89,7 +95,7 @@ const TechApplication = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-600 to-green-600 text-white py-20">
+      <section className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">Tech Academy Application</h1>
           <p className="text-xl md:text-2xl max-w-3xl mx-auto">
@@ -237,8 +243,8 @@ const TechApplication = () => {
               
               <div className="space-y-6">
                 <div>
-                  <Label htmlFor="programmingExperience">Programming Experience Level <span className='text-red-600 font-bold'>*</span></Label>
-                  <Select onValueChange={(value) => handleInputChange('programmingExperience', value)}>
+                  <Label htmlFor="computerLiteracy">Computer Literacy Level <span className='text-red-600 font-bold'>*</span></Label>
+                  <Select onValueChange={(value) => handleInputChange('computerLiteracy', value)}>
                     <SelectTrigger>
                       <SelectValue placeholder="Select experience level" />
                     </SelectTrigger>
@@ -253,23 +259,23 @@ const TechApplication = () => {
                 
                 <div>
                   <Label htmlFor="techInterests">Areas of Tech Interest <span className='text-red-600 font-bold'>*</span></Label>
-                  <Textarea
-                    id="techInterests"
-                    placeholder="e.g., Web Development, Mobile Apps, Data Science, AI/ML, etc."
-                    value={formData.techInterests}
-                    onChange={(e) => handleInputChange('techInterests', e.target.value)}
-                    required
-                  />
-                </div>
-                
-                <div>
-                  <Label htmlFor="projectExperience">Previous Projects (if any)</Label>
-                  <Textarea
-                    id="projectExperience"
-                    placeholder="Describe any tech projects you've worked on"
-                    value={formData.projectExperience}
-                    onChange={(e) => handleInputChange('projectExperience', e.target.value)}
-                  />
+                  <Select onValueChange={(value) => handleInputChange('techInterests', value)}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select Learning Track" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Basic computer course">Basic computer course</SelectItem>
+                      <SelectItem value="Graphics Designing">Graphics Designing</SelectItem>
+                      <SelectItem value="Microsoft Office Applications">Microsoft Office Applications</SelectItem>
+                      <SelectItem value="Virtual Assistant">Virtual Assistant</SelectItem>
+                      <SelectItem value="Customer Support">Customer Support</SelectItem>
+                      <SelectItem value="Video Editing">Mobile Video Editing</SelectItem>
+                      <SelectItem value="Social media management">Social media management</SelectItem>
+                      <SelectItem value="Printing and Branding">Printing and Branding</SelectItem>
+                      <SelectItem value="Frontend Web Development">Frontend Web Development</SelectItem>
+                      <SelectItem value="Cyber security">Cyber security</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
               </div>
             </div>
@@ -310,6 +316,23 @@ const TechApplication = () => {
                       <SelectItem value="10-15">10-15 hours</SelectItem>
                       <SelectItem value="15-20">15-20 hours</SelectItem>
                       <SelectItem value="20+">20+ hours</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div>
+                  <Label htmlFor="hearAbout">How did you hear about this program? <span className='text-red-600 font-bold'>*</span></Label>
+                  <Select onValueChange={(value) => handleInputChange('hearAbout', value)}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select option" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="social-media">Social Media</SelectItem>
+                      <SelectItem value="friend-family">Friend/Family</SelectItem>
+                      <SelectItem value="church">Church</SelectItem>
+                      <SelectItem value="website">Website</SelectItem>
+                      <SelectItem value="flyer">Flyer/Poster</SelectItem>
+                      <SelectItem value="other">Other</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -356,21 +379,6 @@ const TechApplication = () => {
               </div>
             </div>
 
-            {/* Emergency Contact */}
-            <div className="bg-gray-50 p-6 rounded-lg">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Emergency Contact</h3>
-              
-              <div>
-                <Label htmlFor="emergencyContact">Emergency Contact (Name, Relationship, Phone) *</Label>
-                <Textarea
-                  id="emergencyContact"
-                  value={formData.emergencyContact}
-                  onChange={(e) => handleInputChange('emergencyContact', e.target.value)}
-                  required
-                />
-              </div>
-            </div>
-
             {/* Payment Option */}
             <div className="bg-yellow-50 p-6 rounded-lg border border-yellow-200">
               <h3 className="text-2xl font-bold text-gray-900 mb-6">Payment Option</h3>
@@ -396,7 +404,7 @@ const TechApplication = () => {
             <div className="text-center">
               <Button 
                 type="submit" 
-                className="bg-green-600 hover:bg-green-700 px-8 py-3 text-lg"
+                className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white px-8 py-3 text-lg"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? 'Submitting...' : 'Submit Application'}
@@ -406,30 +414,38 @@ const TechApplication = () => {
         </div>
       </section>
 
-       {showSuccessModal && (
-          <SuccessModal onClose={() => {
-          setShowSuccessModal(false);
-           }} />
-        )}
-
+      {showSuccessModal && (
+        <SuccessModal onClose={() => setShowSuccessModal(false)} />
+      )}
     </div>
   );
 };
 
-  // SuccessModal Component (same as before)
-  const SuccessModal = ({ onClose }) => (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 text-green-500 p-4">
-      <div className="bg-white p-8 rounded-lg text-center">
-        <h2 className="text-2xl font-bold mb-4">Form Successfully Submitted</h2>
-        <p>We will contact you shortly via email. Thank you!</p>
-        <button 
+const SuccessModal = ({ onClose }: { onClose: () => void }) => (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+    <div className="bg-white rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl">
+      <div className="text-center">
+        <div className="mx-auto flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-purple-100 to-indigo-100 mb-6">
+          <CheckCircle className="w-8 h-8 text-purple-600" />
+        </div>
+        
+        <h2 className="text-2xl font-bold text-gray-900 mb-4">
+          Application Submitted Successfully!
+        </h2>
+        
+        <p className="text-gray-600 mb-6 leading-relaxed">
+          Thank you for applying to our Tech Academy. We have received your application and will review it shortly. You will receive a confirmation email with next steps.
+        </p>
+        
+        <Button 
           onClick={onClose} 
-          className="mt-4 bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-500 transition duration-300"
+          className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200"
         >
           Close
-        </button>
+        </Button>
       </div>
     </div>
-  );
+  </div>
+);
 
 export default TechApplication;

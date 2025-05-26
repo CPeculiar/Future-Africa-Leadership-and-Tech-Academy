@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { CheckCircle } from 'lucide-react';
 
 const LeadershipApplication = () => {
   const [formData, setFormData] = useState({
@@ -25,24 +26,37 @@ const LeadershipApplication = () => {
     institution: '',
     graduationYear: '',
     leadershipExperience: '',
-    motivationLetter: '',
     expectations: '',
-    commitment: '',
-    referenceOne: '',
-    referenceTwo: '',
-    emergencyContact: '',
-    medicalConditions: '',
-    dietaryRestrictions: '',
-    paymentOption: ''
+    church: '',
+    zone: '',
+    department: '',
+    office: '',
+    hearAbout: ''
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState({});
-  const [formErrors, setFormErrors] = useState({});
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const navigate = useNavigate();
 
+  // Church list with only names
+  const churchList = [
+    "TLBC Awka", "TLBC Ekwulobia", "TLBC Ihiala",
+    "TLBC Nnewi", "TLBC Onitsha", "TLBC Mbaukwu",
+    "TLBCM Agulu", "TLBCM COOU Igbariam", "TLBCM COOU Uli",
+    "TLBCM FUTO", "TLBCM IMSU", "TLBCM Mgbakwu",
+    "TLBCM NAU", "TLBCM Nekede", "TLBCM Oko",
+    "TLBCM Okofia", "TLBCM UNILAG", "TLTN Agulu",
+    "TLTN Awka"
+  ];
+
+  // Zones list with only names
+  const zoneList = [
+    "Awka zone",
+    "Ekwulobia zone", 
+    "Nnewi zone",
+    "Owerri zone",
+    "Onitsha zone"
+  ];
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -50,43 +64,39 @@ const LeadershipApplication = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-     setFormErrors({});
     setIsSubmitting(true);
     
     try {
       console.log('Leadership application submitted:', formData);
-       const applicationId = await submitFormApplication(formData);
-        setShowSuccessModal(true);
-      // alert('Application submitted successfully!');
-        setFormData({
-          fullName: '',
-          email: '',
-          phone: '',
-          dateOfBirth: '',
-          gender: '',
-          nationality: '',
-          stateOfOrigin: '',
-          currentAddress: '',
-          occupation: '',
-          organization: '',
-          educationLevel: '',
-          fieldOfStudy: '',
-          institution: '',
-          graduationYear: '',
-          leadershipExperience: '',
-          motivationLetter: '',
-          expectations: '',
-          commitment: '',
-          referenceOne: '',
-          referenceTwo: '',
-          emergencyContact: '',
-          medicalConditions: '',
-          dietaryRestrictions: '',
-          paymentOption: ''
-        });
+      await submitFormApplication(formData);
+      setShowSuccessModal(true);
+      
+      // Clear form
+      setFormData({
+        fullName: '',
+        email: '',
+        phone: '',
+        dateOfBirth: '',
+        gender: '',
+        nationality: '',
+        stateOfOrigin: '',
+        currentAddress: '',
+        occupation: '',
+        organization: '',
+        educationLevel: '',
+        fieldOfStudy: '',
+        institution: '',
+        graduationYear: '',
+        leadershipExperience: '',
+        expectations: '',
+        church: '',
+        zone: '',
+        department: '',
+        office: '',
+        hearAbout: ''
+      });
     } catch (error) {
       console.error('Error submitting application:', error);
-      setFormErrors({ form: `Registration failed: ${error.message}` });
       alert('Error submitting application. Please try again.');
     } finally {
       setIsSubmitting(false);
@@ -96,7 +106,7 @@ const LeadershipApplication = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-600 to-green-600 text-white py-20">
+      <section className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">Leadership Academy Application</h1>
           <p className="text-xl md:text-2xl max-w-3xl mx-auto">
@@ -192,6 +202,65 @@ const LeadershipApplication = () => {
               </div>
             </div>
 
+            {/* Church Information */}
+            <div className="bg-gray-50 p-6 rounded-lg">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">Church Information</h3>
+              
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <Label htmlFor="church">Church *</Label>
+                  <Select onValueChange={(value) => handleInputChange('church', value)}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select Church" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {churchList.map((church) => (
+                        <SelectItem key={church} value={church}>
+                          {church}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                
+                <div>
+                  <Label htmlFor="zone">Zone *</Label>
+                  <Select onValueChange={(value) => handleInputChange('zone', value)}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select Zone" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {zoneList.map((zone) => (
+                        <SelectItem key={zone} value={zone}>
+                          {zone}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-6 mt-6">
+                <div>
+                  <Label htmlFor="department">Church Department</Label>
+                  <Input
+                    id="department"
+                    value={formData.department}
+                    onChange={(e) => handleInputChange('department', e.target.value)}
+                  />
+                </div>
+                
+                <div>
+                  <Label htmlFor="office">Current Office(s)</Label>
+                  <Input
+                    id="office"
+                    value={formData.office}
+                    onChange={(e) => handleInputChange('office', e.target.value)}
+                  />
+                </div>
+              </div>
+            </div>
+
             {/* Professional Information */}
             <div className="bg-gray-50 p-6 rounded-lg">
               <h3 className="text-2xl font-bold text-gray-900 mb-6">Professional Information</h3>
@@ -274,7 +343,7 @@ const LeadershipApplication = () => {
 
             {/* Leadership Experience */}
             <div className="bg-gray-50 p-6 rounded-lg">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Leadership & Motivation</h3>
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">Leadership & Expectations</h3>
               
               <div className="space-y-6">
                 <div>
@@ -289,17 +358,6 @@ const LeadershipApplication = () => {
                 </div>
                 
                 <div>
-                  <Label htmlFor="motivationLetter">Motivation Letter *</Label>
-                  <Textarea
-                    id="motivationLetter"
-                    placeholder="Why do you want to join our Leadership Academy?"
-                    value={formData.motivationLetter}
-                    onChange={(e) => handleInputChange('motivationLetter', e.target.value)}
-                    required
-                  />
-                </div>
-                
-                <div>
                   <Label htmlFor="expectations">What are your expectations from this program? *</Label>
                   <Textarea
                     id="expectations"
@@ -308,67 +366,22 @@ const LeadershipApplication = () => {
                     required
                   />
                 </div>
-              </div>
-            </div>
 
-            {/* References */}
-            <div className="bg-gray-50 p-6 rounded-lg">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">References</h3>
-              
-              <div className="space-y-6">
                 <div>
-                  <Label htmlFor="referenceOne">Reference 1 (Name, Position, Contact) *</Label>
-                  <Textarea
-                    id="referenceOne"
-                    value={formData.referenceOne}
-                    onChange={(e) => handleInputChange('referenceOne', e.target.value)}
-                    required
-                  />
-                </div>
-                
-                <div>
-                  <Label htmlFor="referenceTwo">Reference 2 (Name, Position, Contact)</Label>
-                  <Textarea
-                    id="referenceTwo"
-                    value={formData.referenceTwo}
-                    onChange={(e) => handleInputChange('referenceTwo', e.target.value)}
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Emergency Contact & Medical */}
-            <div className="bg-gray-50 p-6 rounded-lg">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Emergency Contact & Medical Information</h3>
-              
-              <div className="space-y-6">
-                <div>
-                  <Label htmlFor="emergencyContact">Emergency Contact (Name, Relationship, Phone) *</Label>
-                  <Textarea
-                    id="emergencyContact"
-                    value={formData.emergencyContact}
-                    onChange={(e) => handleInputChange('emergencyContact', e.target.value)}
-                    required
-                  />
-                </div>
-                
-                <div>
-                  <Label htmlFor="medicalConditions">Medical Conditions/Allergies</Label>
-                  <Textarea
-                    id="medicalConditions"
-                    placeholder="Please list any medical conditions we should be aware of"
-                    value={formData.medicalConditions}
-                    onChange={(e) => handleInputChange('medicalConditions', e.target.value)}
-                  />
-                </div>
-                
-                <div>
-                  <Label htmlFor="dietaryRestrictions">Dietary Restrictions</Label>
-                  <Input
-                    id="dietaryRestrictions"
-                    value={formData.dietaryRestrictions}
-                    onChange={(e) => handleInputChange('dietaryRestrictions', e.target.value)}
-                  />
+                  <Label htmlFor="hearAbout">How did you hear about this program? *</Label>
+                  <Select onValueChange={(value) => handleInputChange('hearAbout', value)}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select option" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="social-media">Social Media</SelectItem>
+                      <SelectItem value="friend-family">Friend/Family</SelectItem>
+                      <SelectItem value="church">Church</SelectItem>
+                      <SelectItem value="website">Website</SelectItem>
+                      <SelectItem value="flyer">Flyer/Poster</SelectItem>
+                      <SelectItem value="other">Other</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
               </div>
             </div>
@@ -377,7 +390,7 @@ const LeadershipApplication = () => {
             <div className="text-center">
               <Button 
                 type="submit" 
-                className="bg-green-600 hover:bg-green-700 px-8 py-3 text-lg"
+                className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white px-8 py-3 text-lg"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? 'Submitting...' : 'Submit Application'}
@@ -386,8 +399,39 @@ const LeadershipApplication = () => {
           </form>
         </div>
       </section>
+
+      {showSuccessModal && (
+        <SuccessModal onClose={() => setShowSuccessModal(false)} />
+      )}
     </div>
   );
 };
+
+const SuccessModal = ({ onClose }: { onClose: () => void }) => (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+    <div className="bg-white rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl">
+      <div className="text-center">
+        <div className="mx-auto flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-purple-100 to-indigo-100 mb-6">
+          <CheckCircle className="w-8 h-8 text-purple-600" />
+        </div>
+        
+        <h2 className="text-2xl font-bold text-gray-900 mb-4">
+          Application Submitted Successfully!
+        </h2>
+        
+        <p className="text-gray-600 mb-6 leading-relaxed">
+          Thank you for applying to our Leadership Academy. We have received your application and will review it shortly. You will receive a confirmation email with next steps.
+        </p>
+        
+        <Button 
+          onClick={onClose} 
+          className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200"
+        >
+          Close
+        </Button>
+      </div>
+    </div>
+  </div>
+);
 
 export default LeadershipApplication;

@@ -4,112 +4,67 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Checkbox } from '@/components/ui/checkbox';
-import { MapPin, Phone, Mail } from 'lucide-react';
+import Footer from '@/components/Footer';
+import { Mail, Phone, MapPin } from 'lucide-react';
 
 const Contact = () => {
-  const [contactForm, setContactForm] = useState({
+  const [formData, setFormData] = useState({
     name: '',
     email: '',
     subject: '',
     message: ''
   });
 
-  const [volunteerForm, setVolunteerForm] = useState({
-    positionType: '',
-    skillsets: [],
-    mode: '',
-    experience: '',
-    availability: '',
-    duration: '',
-    education: '',
-    reason: '',
-    fullName: '',
-    email: '',
-    phone: '',
-    contactMethod: '',
-    howHeard: '',
-    availableForInterview: ''
-  });
-
-  const skillsetOptions = [
-    'Program Management',
-    'E-Learning Platforms',
-    'Content Creation',
-    'Digital Marketing',
-    'Social Media Management',
-    'Graphics Designing',
-    'Video Editing',
-    'Photography',
-    'Vlog & Blogging',
-    'Spoken Words Artist',
-    'Event Planning',
-    'Community Management',
-    'Research and Analysis',
-    'Multiple Languages'
-  ];
-
-  const handleContactSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Contact form submitted:', contactForm);
-    // Handle contact form submission
+    console.log('Contact form submitted:', formData);
+    alert('Thank you for your message! We will get back to you soon.');
+    setFormData({ name: '', email: '', subject: '', message: '' });
   };
 
-  const handleVolunteerSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Volunteer form submitted:', volunteerForm);
-    // Handle volunteer form submission
-  };
-
-  const handleSkillsetChange = (skillset: string, checked: boolean) => {
-    setVolunteerForm(prev => ({
-      ...prev,
-      skillsets: checked 
-        ? [...prev.skillsets, skillset]
-        : prev.skillsets.filter(s => s !== skillset)
-    }));
+  const handleChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
   };
 
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-600 to-green-600 text-white py-20">
+      <section className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">Contact Us</h1>
           <p className="text-xl md:text-2xl max-w-3xl mx-auto">
-            Get in touch with us for more information about our programs
+            Get in touch with us to learn more about our programs and how we can help you achieve your goals
           </p>
         </div>
       </section>
 
-      {/* Contact Information */}
+      {/* Contact Information & Form */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12">
-            {/* Contact Details */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+            {/* Contact Information */}
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-8">Get In Touch</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-8">Get in Touch</h2>
               
-              <div className="space-y-6 mb-8">
-                <div className="flex items-start space-x-4">
-                  <MapPin className="w-6 h-6 text-blue-600 mt-1" />
+              <div className="space-y-6">
+                <div className="flex items-start">
+                  <MapPin className="w-6 h-6 text-purple-600 mt-1 mr-4" />
                   <div>
-                    <h3 className="font-semibold text-gray-900">Address</h3>
-                    <p className="text-gray-600">TLBC Auditorium<br />3 Uche Ekwunife Crescent, Kwata Awka</p>
+                    <h3 className="font-semibold text-gray-900">Our Location</h3>
+                    <p className="text-gray-600">3 Uche Ekwunife Crescent<br />Kwata Awka, Nigeria</p>
                   </div>
                 </div>
                 
-                <div className="flex items-start space-x-4">
-                  <Phone className="w-6 h-6 text-blue-600 mt-1" />
+                <div className="flex items-start">
+                  <Phone className="w-6 h-6 text-purple-600 mt-1 mr-4" />
                   <div>
                     <h3 className="font-semibold text-gray-900">Phone</h3>
                     <p className="text-gray-600">09060121720</p>
                   </div>
                 </div>
                 
-                <div className="flex items-start space-x-4">
-                  <Mail className="w-6 h-6 text-blue-600 mt-1" />
+                <div className="flex items-start">
+                  <Mail className="w-6 h-6 text-purple-600 mt-1 mr-4" />
                   <div>
                     <h3 className="font-semibold text-gray-900">Email</h3>
                     <p className="text-gray-600">futureafrica.leadtech@gmail.com</p>
@@ -117,61 +72,75 @@ const Contact = () => {
                 </div>
               </div>
 
-              {/* Map Placeholder */}
-              <div className="bg-gray-200 h-64 rounded-lg flex items-center justify-center">
-                <p className="text-gray-500">Google Map Integration</p>
+              {/* Google Map */}
+              <div className="mt-8">
+                <h3 className="font-semibold text-gray-900 mb-4">Find Us</h3>
+                <div className="bg-gray-100 rounded-lg overflow-hidden">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3971.0123456789!2d7.0733!3d6.2103!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMTInMzcuMSJOIDfCsDA0JzI0LjAiRQ!5e0!3m2!1sen!2sng!4v1620000000000!5m2!1sen!2sng"
+                    width="100%"
+                    height="250"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="FALATA Location"
+                  ></iframe>
+                </div>
               </div>
             </div>
 
             {/* Contact Form */}
             <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Send us a Message</h3>
-              <form onSubmit={handleContactSubmit} className="space-y-6">
+              <h2 className="text-3xl font-bold text-gray-900 mb-8">Send us a Message</h2>
+              
+              <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <Label htmlFor="name">Full Name</Label>
+                  <Label htmlFor="name">Name *</Label>
                   <Input
                     id="name"
-                    type="text"
-                    value={contactForm.name}
-                    onChange={(e) => setContactForm(prev => ({ ...prev, name: e.target.value }))}
+                    value={formData.name}
+                    onChange={(e) => handleChange('name', e.target.value)}
                     required
                   />
                 </div>
                 
                 <div>
-                  <Label htmlFor="email">Email</Label>
+                  <Label htmlFor="email">Email *</Label>
                   <Input
                     id="email"
                     type="email"
-                    value={contactForm.email}
-                    onChange={(e) => setContactForm(prev => ({ ...prev, email: e.target.value }))}
+                    value={formData.email}
+                    onChange={(e) => handleChange('email', e.target.value)}
                     required
                   />
                 </div>
                 
                 <div>
-                  <Label htmlFor="subject">Subject</Label>
+                  <Label htmlFor="subject">Subject *</Label>
                   <Input
                     id="subject"
-                    type="text"
-                    value={contactForm.subject}
-                    onChange={(e) => setContactForm(prev => ({ ...prev, subject: e.target.value }))}
+                    value={formData.subject}
+                    onChange={(e) => handleChange('subject', e.target.value)}
                     required
                   />
                 </div>
                 
                 <div>
-                  <Label htmlFor="message">Message</Label>
+                  <Label htmlFor="message">Message *</Label>
                   <Textarea
                     id="message"
-                    rows={5}
-                    value={contactForm.message}
-                    onChange={(e) => setContactForm(prev => ({ ...prev, message: e.target.value }))}
+                    rows={6}
+                    value={formData.message}
+                    onChange={(e) => handleChange('message', e.target.value)}
                     required
                   />
                 </div>
                 
-                <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700">
+                <Button 
+                  type="submit" 
+                  className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
+                >
                   Send Message
                 </Button>
               </form>
@@ -180,200 +149,7 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Volunteer/Intern Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Volunteer/Intern with Us</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Join our team and contribute to shaping the future of Africa's youth through leadership and technology education
-            </p>
-          </div>
-
-          <form onSubmit={handleVolunteerSubmit} className="max-w-3xl mx-auto space-y-6">
-            <div className="grid md:grid-cols-2 gap-6">
-              <div>
-                <Label htmlFor="positionType">Type of Position *</Label>
-                <Select onValueChange={(value) => setVolunteerForm(prev => ({ ...prev, positionType: value }))}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select position type" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="volunteer">Volunteer</SelectItem>
-                    <SelectItem value="intern">Intern</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div>
-                <Label htmlFor="mode">Mode of Availability *</Label>
-                <Select onValueChange={(value) => setVolunteerForm(prev => ({ ...prev, mode: value }))}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select mode" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="virtually">Virtually</SelectItem>
-                    <SelectItem value="physically">Physically</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-
-            <div>
-              <Label>Which of these skillset(s) describes you? *</Label>
-              <div className="grid md:grid-cols-2 gap-2 mt-2">
-                {skillsetOptions.map((skillset) => (
-                  <div key={skillset} className="flex items-center space-x-2">
-                    <Checkbox
-                      id={skillset}
-                      onCheckedChange={(checked) => handleSkillsetChange(skillset, checked as boolean)}
-                    />
-                    <Label htmlFor={skillset} className="text-sm">{skillset}</Label>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <Label htmlFor="experience">Previous Experience *</Label>
-              <Textarea
-                id="experience"
-                placeholder="Briefly describe any relevant volunteering or internship experience"
-                value={volunteerForm.experience}
-                onChange={(e) => setVolunteerForm(prev => ({ ...prev, experience: e.target.value }))}
-                required
-              />
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-6">
-              <div>
-                <Label htmlFor="availability">Level of Availability *</Label>
-                <Select onValueChange={(value) => setVolunteerForm(prev => ({ ...prev, availability: value }))}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select availability" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="once-week">Once a Week</SelectItem>
-                    <SelectItem value="weekday">Any Week day</SelectItem>
-                    <SelectItem value="weekends">Weekends (Saturdays Only)</SelectItem>
-                    <SelectItem value="daily">Daily</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div>
-                <Label htmlFor="duration">Duration of Availability *</Label>
-                <Input
-                  id="duration"
-                  placeholder="Start Date - End Date"
-                  value={volunteerForm.duration}
-                  onChange={(e) => setVolunteerForm(prev => ({ ...prev, duration: e.target.value }))}
-                  required
-                />
-              </div>
-            </div>
-
-            <div>
-              <Label htmlFor="education">Educational Background *</Label>
-              <Input
-                id="education"
-                placeholder="Name of University/Institution, Field of Study and Current Year of Study"
-                value={volunteerForm.education}
-                onChange={(e) => setVolunteerForm(prev => ({ ...prev, education: e.target.value }))}
-                required
-              />
-            </div>
-
-            <div>
-              <Label htmlFor="reason">Why do you want to volunteer/intern with FALATA? *</Label>
-              <Textarea
-                id="reason"
-                value={volunteerForm.reason}
-                onChange={(e) => setVolunteerForm(prev => ({ ...prev, reason: e.target.value }))}
-                required
-              />
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-6">
-              <div>
-                <Label htmlFor="fullName">Your Full Name *</Label>
-                <Input
-                  id="fullName"
-                  value={volunteerForm.fullName}
-                  onChange={(e) => setVolunteerForm(prev => ({ ...prev, fullName: e.target.value }))}
-                  required
-                />
-              </div>
-
-              <div>
-                <Label htmlFor="volunteerEmail">Email Address *</Label>
-                <Input
-                  id="volunteerEmail"
-                  type="email"
-                  value={volunteerForm.email}
-                  onChange={(e) => setVolunteerForm(prev => ({ ...prev, email: e.target.value }))}
-                  required
-                />
-              </div>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-6">
-              <div>
-                <Label htmlFor="phone">WhatsApp/Telegram No *</Label>
-                <Input
-                  id="phone"
-                  value={volunteerForm.phone}
-                  onChange={(e) => setVolunteerForm(prev => ({ ...prev, phone: e.target.value }))}
-                  required
-                />
-              </div>
-
-              <div>
-                <Label htmlFor="contactMethod">How best can we reach you? *</Label>
-                <Select onValueChange={(value) => setVolunteerForm(prev => ({ ...prev, contactMethod: value }))}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select contact method" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="whatsapp">WhatsApp</SelectItem>
-                    <SelectItem value="telegram">Telegram</SelectItem>
-                    <SelectItem value="email">Email</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-6">
-              <div>
-                <Label htmlFor="howHeard">How did you hear about this? *</Label>
-                <Input
-                  id="howHeard"
-                  value={volunteerForm.howHeard}
-                  onChange={(e) => setVolunteerForm(prev => ({ ...prev, howHeard: e.target.value }))}
-                  required
-                />
-              </div>
-
-              <div>
-                <Label htmlFor="interview">Available for interview if required? *</Label>
-                <Select onValueChange={(value) => setVolunteerForm(prev => ({ ...prev, availableForInterview: value }))}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select option" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="yes">Yes</SelectItem>
-                    <SelectItem value="no">No</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-
-            <Button type="submit" className="w-full bg-green-600 hover:bg-green-700">
-              Submit Application
-            </Button>
-          </form>
-        </div>
-      </section>
+      <Footer />
     </div>
   );
 };
