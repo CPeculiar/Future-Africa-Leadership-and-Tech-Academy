@@ -1,5 +1,8 @@
-
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+import { submitTechApplication } from "../services/firestore";
+import { doc, setDoc } from "firebase/firestore";
+import { auth, db, storage } from "../services/firebaseConfig";
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -32,6 +35,11 @@ const TechApplication = () => {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState({});
+  const [formErrors, setFormErrors] = useState({});
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const navigate = useNavigate();
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -39,14 +47,39 @@ const TechApplication = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+     setFormErrors({});
     setIsSubmitting(true);
     
     try {
-      console.log('Tech application submitted:', formData);
-      // Handle form submission logic here
-      alert('Application submitted successfully!');
+      console.log('Tech application submitting:', formData);
+      const applicationId = await submitTechApplication(formData);
+      setShowSuccessModal(true);
+      // alert('Application submitted successfully!');
+      setFormData({
+        fullName: '',
+        email: '',
+        phone: '',
+        dateOfBirth: '',
+        gender: '',
+        nationality: '',
+        currentAddress: '',
+        educationLevel: '',
+        fieldOfStudy: '',
+        institution: '',
+        programmingExperience: '',
+        techInterests: '',
+        motivationLetter: '',
+        projectExperience: '',
+        careerGoals: '',
+        availableTime: '',
+        computerAccess: '',
+        internetConnection: '',
+        emergencyContact: '',
+        paymentOption: ''
+        });
     } catch (error) {
       console.error('Error submitting application:', error);
+      setFormErrors({ form: `Registration failed: ${error.message}` });
       alert('Error submitting application. Please try again.');
     } finally {
       setIsSubmitting(false);
@@ -78,7 +111,7 @@ const TechApplication = () => {
               
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <Label htmlFor="fullName">Full Name *</Label>
+                  <Label htmlFor="fullName">Full Name <span className='text-red-600 font-bold'>*</span></Label>
                   <Input
                     id="fullName"
                     value={formData.fullName}
@@ -88,7 +121,7 @@ const TechApplication = () => {
                 </div>
                 
                 <div>
-                  <Label htmlFor="email">Email Address *</Label>
+                  <Label htmlFor="email">Email Address <span className='text-red-600 font-bold'>*</span></Label>
                   <Input
                     id="email"
                     type="email"
@@ -99,7 +132,7 @@ const TechApplication = () => {
                 </div>
                 
                 <div>
-                  <Label htmlFor="phone">Phone Number *</Label>
+                  <Label htmlFor="phone">Phone Number <span className='text-red-600 font-bold'>*</span></Label>
                   <Input
                     id="phone"
                     value={formData.phone}
@@ -109,7 +142,7 @@ const TechApplication = () => {
                 </div>
                 
                 <div>
-                  <Label htmlFor="dateOfBirth">Date of Birth *</Label>
+                  <Label htmlFor="dateOfBirth">Date of Birth <span className='text-red-600 font-bold'>*</span></Label>
                   <Input
                     id="dateOfBirth"
                     type="date"
@@ -120,7 +153,7 @@ const TechApplication = () => {
                 </div>
                 
                 <div>
-                  <Label htmlFor="gender">Gender *</Label>
+                  <Label htmlFor="gender">Gender <span className='text-red-600 font-bold'>*</span></Label>
                   <Select onValueChange={(value) => handleInputChange('gender', value)}>
                     <SelectTrigger>
                       <SelectValue placeholder="Select gender" />
@@ -134,7 +167,7 @@ const TechApplication = () => {
                 </div>
                 
                 <div>
-                  <Label htmlFor="nationality">Nationality *</Label>
+                  <Label htmlFor="nationality">Nationality <span className='text-red-600 font-bold'>*</span></Label>
                   <Input
                     id="nationality"
                     value={formData.nationality}
@@ -145,7 +178,7 @@ const TechApplication = () => {
               </div>
               
               <div className="mt-6">
-                <Label htmlFor="currentAddress">Current Address *</Label>
+                <Label htmlFor="currentAddress">Current Address <span className='text-red-600 font-bold'>*</span></Label>
                 <Textarea
                   id="currentAddress"
                   value={formData.currentAddress}
@@ -161,7 +194,7 @@ const TechApplication = () => {
               
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <Label htmlFor="educationLevel">Current Education Level *</Label>
+                  <Label htmlFor="educationLevel">Current Education Level <span className='text-red-600 font-bold'>*</span></Label>
                   <Select onValueChange={(value) => handleInputChange('educationLevel', value)}>
                     <SelectTrigger>
                       <SelectValue placeholder="Select education level" />
@@ -177,7 +210,7 @@ const TechApplication = () => {
                 </div>
                 
                 <div>
-                  <Label htmlFor="fieldOfStudy">Field of Study *</Label>
+                  <Label htmlFor="fieldOfStudy">Field of Study <span className='text-red-600 font-bold'>*</span></Label>
                   <Input
                     id="fieldOfStudy"
                     value={formData.fieldOfStudy}
@@ -187,7 +220,7 @@ const TechApplication = () => {
                 </div>
                 
                 <div className="md:col-span-2">
-                  <Label htmlFor="institution">Institution *</Label>
+                  <Label htmlFor="institution">Institution <span className='text-red-600 font-bold'>*</span></Label>
                   <Input
                     id="institution"
                     value={formData.institution}
@@ -204,7 +237,7 @@ const TechApplication = () => {
               
               <div className="space-y-6">
                 <div>
-                  <Label htmlFor="programmingExperience">Programming Experience Level *</Label>
+                  <Label htmlFor="programmingExperience">Programming Experience Level <span className='text-red-600 font-bold'>*</span></Label>
                   <Select onValueChange={(value) => handleInputChange('programmingExperience', value)}>
                     <SelectTrigger>
                       <SelectValue placeholder="Select experience level" />
@@ -219,7 +252,7 @@ const TechApplication = () => {
                 </div>
                 
                 <div>
-                  <Label htmlFor="techInterests">Areas of Tech Interest *</Label>
+                  <Label htmlFor="techInterests">Areas of Tech Interest <span className='text-red-600 font-bold'>*</span></Label>
                   <Textarea
                     id="techInterests"
                     placeholder="e.g., Web Development, Mobile Apps, Data Science, AI/ML, etc."
@@ -247,7 +280,7 @@ const TechApplication = () => {
               
               <div className="space-y-6">
                 <div>
-                  <Label htmlFor="motivationLetter">Why do you want to join our Tech Academy? *</Label>
+                  <Label htmlFor="motivationLetter">Why do you want to join our Tech Academy? <span className='text-red-600 font-bold'>*</span></Label>
                   <Textarea
                     id="motivationLetter"
                     value={formData.motivationLetter}
@@ -257,7 +290,7 @@ const TechApplication = () => {
                 </div>
                 
                 <div>
-                  <Label htmlFor="careerGoals">What are your tech career goals? *</Label>
+                  <Label htmlFor="careerGoals">What are your tech career goals? <span className='text-red-600 font-bold'>*</span></Label>
                   <Textarea
                     id="careerGoals"
                     value={formData.careerGoals}
@@ -267,7 +300,7 @@ const TechApplication = () => {
                 </div>
                 
                 <div>
-                  <Label htmlFor="availableTime">How many hours per week can you dedicate to learning? *</Label>
+                  <Label htmlFor="availableTime">How many hours per week can you dedicate to learning? <span className='text-red-600 font-bold'>*</span></Label>
                   <Select onValueChange={(value) => handleInputChange('availableTime', value)}>
                     <SelectTrigger>
                       <SelectValue placeholder="Select time commitment" />
@@ -289,7 +322,7 @@ const TechApplication = () => {
               
               <div className="space-y-6">
                 <div>
-                  <Label htmlFor="computerAccess">Do you have access to a computer? *</Label>
+                  <Label htmlFor="computerAccess">Do you have access to a computer? <span className='text-red-600 font-bold'>*</span></Label>
                   <RadioGroup onValueChange={(value) => handleInputChange('computerAccess', value)}>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="yes-own" id="yes-own" />
@@ -307,7 +340,7 @@ const TechApplication = () => {
                 </div>
                 
                 <div>
-                  <Label htmlFor="internetConnection">Internet Connection Quality *</Label>
+                  <Label htmlFor="internetConnection">Internet Connection Quality <span className='text-red-600 font-bold'>*</span></Label>
                   <Select onValueChange={(value) => handleInputChange('internetConnection', value)}>
                     <SelectTrigger>
                       <SelectValue placeholder="Select connection quality" />
@@ -372,8 +405,31 @@ const TechApplication = () => {
           </form>
         </div>
       </section>
+
+       {showSuccessModal && (
+          <SuccessModal onClose={() => {
+          setShowSuccessModal(false);
+           }} />
+        )}
+
     </div>
   );
 };
+
+  // SuccessModal Component (same as before)
+  const SuccessModal = ({ onClose }) => (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 text-green-500 p-4">
+      <div className="bg-white p-8 rounded-lg text-center">
+        <h2 className="text-2xl font-bold mb-4">Form Successfully Submitted</h2>
+        <p>We will contact you shortly via email. Thank you!</p>
+        <button 
+          onClick={onClose} 
+          className="mt-4 bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-gray-500 transition duration-300"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  );
 
 export default TechApplication;
