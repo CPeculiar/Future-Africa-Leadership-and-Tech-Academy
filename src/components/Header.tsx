@@ -33,7 +33,7 @@ const Header = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2" onClick={scrollToTop}>
             <img 
-              src="/src/assets/images/FALATA.jpg" 
+              src="/FALATA.jpg" 
               alt="FALATA Logo" 
               className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg object-cover"
             />
