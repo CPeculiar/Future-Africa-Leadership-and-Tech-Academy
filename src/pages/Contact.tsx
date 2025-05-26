@@ -1,5 +1,6 @@
-
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+import { submitContactForm } from "../services/firestore";
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -15,15 +16,32 @@ const Contact = () => {
     message: ''
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Contact form submitted:', formData);
-    alert('Thank you for your message! We will get back to you soon.');
-    setFormData({ name: '', email: '', subject: '', message: '' });
-  };
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+  };
+  
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      console.log('Contact Form submitted:', formData);
+      await submitContactForm(formData);
+
+      alert('Thank you for your message! We will get back to you soon.');
+      
+      setFormData({ name: '', email: '', subject: '', message: '' });
+      console.log('Contact form submitted successfully');
+    } catch (error) {
+      console.error('Error submitting contact form:', error);
+      alert('Error submitting contact form. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -140,8 +158,9 @@ const Contact = () => {
                 <Button 
                   type="submit" 
                   className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
+                  disabled={isSubmitting}
                 >
-                  Send Message
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
                 </Button>
               </form>
             </div>
