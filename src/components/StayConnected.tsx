@@ -3,7 +3,7 @@ import { Facebook, Twitter, Linkedin, Youtube, Instagram } from 'lucide-react';
 
 const StayConnected = () => {
   return (
-    <section className="bg-gray-900 text-white py-16 sm:py-20">
+    <section className="bg-gradient-to-b from-gray-400 via-gray-600 to-gray-900 text-white py-16 sm:py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">Stay Connected</h2>
         <p className="text-lg sm:text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
