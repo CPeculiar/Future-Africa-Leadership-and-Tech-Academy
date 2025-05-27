@@ -1,5 +1,5 @@
-
 import Footer from '@/components/Footer';
+import StayConnected from '@/components/StayConnected';
 
 const About = () => {
   return (
@@ -74,6 +74,7 @@ const About = () => {
         </div>
       </section>
 
+      <StayConnected />
       <Footer />
     </div>
   );

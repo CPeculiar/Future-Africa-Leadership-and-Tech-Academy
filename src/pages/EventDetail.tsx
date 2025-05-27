@@ -1,7 +1,7 @@
-
 import { useParams, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import Footer from '@/components/Footer';
+import StayConnected from '@/components/StayConnected';
 import { Calendar, MapPin, Clock, Users } from 'lucide-react';
 
 const EventDetail = () => {
@@ -178,6 +178,7 @@ const EventDetail = () => {
         </div>
       </section>
 
+      <StayConnected />
       <Footer />
     </div>
   );

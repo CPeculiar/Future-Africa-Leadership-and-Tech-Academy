@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import Footer from '@/components/Footer';
+import StayConnected from '@/components/StayConnected';
 import { Mail, Phone, MapPin } from 'lucide-react';
 
 const Contact = () => {
@@ -186,6 +187,7 @@ const Contact = () => {
         </div>
       </section>
 
+      <StayConnected />
       <Footer />
     </div>
   );

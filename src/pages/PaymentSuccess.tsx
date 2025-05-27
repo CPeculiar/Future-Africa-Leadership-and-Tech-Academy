@@ -4,6 +4,7 @@ import { useLocation, Link } from 'react-router-dom';
 import { CheckCircle, Download, Mail, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Footer from '@/components/Footer';
+import StayConnected from '@/components/StayConnected';
 
 const PaymentSuccess = () => {
   const location = useLocation();
@@ -112,6 +113,7 @@ const PaymentSuccess = () => {
         </div>
       </div>
       
+      <StayConnected />
       <Footer />
     </div>
   );
