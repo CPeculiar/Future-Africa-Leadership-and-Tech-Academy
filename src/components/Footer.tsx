@@ -1,5 +1,6 @@
 
 import { Link } from 'react-router-dom';
+import { Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
 
 const Footer = () => {
   const scrollToTop = () => {
@@ -77,21 +78,21 @@ const Footer = () => {
               © 2025 Future Africa Leadership and Tech Academy (FALATA). All rights reserved.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              <a href="#" className="text-gray-400 hover:text-blue-500 transition-colors">
                 <span className="sr-only">Facebook</span>
-                <div className="w-6 h-6 bg-blue-600 rounded"></div>
+                <Facebook size={24} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
                 <span className="sr-only">Twitter</span>
-                <div className="w-6 h-6 bg-blue-400 rounded"></div>
+                <Twitter size={24} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              <a href="#" className="text-gray-400 hover:text-blue-600 transition-colors">
                 <span className="sr-only">LinkedIn</span>
-                <div className="w-6 h-6 bg-blue-700 rounded"></div>
+                <Linkedin size={24} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              <a href="#" className="text-gray-400 hover:text-pink-500 transition-colors">
                 <span className="sr-only">Instagram</span>
-                <div className="w-6 h-6 bg-pink-600 rounded"></div>
+                <Instagram size={24} />
               </a>
             </div>
           </div>
