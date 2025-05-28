@@ -33,7 +33,7 @@ const Header = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2 transform transition-all duration-300 hover:scale-105" onClick={scrollToTop}>
             <img 
-              src="/FALATA.jpg" 
+              src="/favicon.ico" 
               alt="FALATA Logo" 
               className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg object-cover transition-all duration-300 hover:shadow-lg"
             />
