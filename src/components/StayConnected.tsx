@@ -41,7 +41,7 @@ const StayConnected = () => {
             className="w-12 h-12 sm:w-14 sm:h-14 bg-black hover:bg-gray-800 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
             aria-label="TikTok"
           >
-            <MessageCircle className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
+            <TikTokIcon className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
           </a>
           
           <a 
@@ -66,3 +66,17 @@ const StayConnected = () => {
 };
 
 export default StayConnected;
+
+// Custom TikTok Icon Component
+const TikTokIcon = ({ size = 24, className = "" }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className={className}
+  >
+    <path d="M19.321 5.562a5.124 5.124 0 0 1-.443-.258 6.228 6.228 0 0 1-1.137-.966c-.849-.849-1.302-1.99-1.302-3.338h-3.017v14.909c0 2.396-1.904 4.32-4.32 4.32-2.396 0-4.32-1.904-4.32-4.32 0-2.396 1.904-4.32 4.32-4.32.462 0 .905.072 1.32.207V8.678c-.425-.06-.862-.091-1.32-.091-4.142 0-7.509 3.367-7.509 7.509S5.959 23.605 10.1 23.605s7.509-3.367 7.509-7.509V9.854c1.555 1.019 3.4 1.612 5.391 1.612v-3.168c-1.019 0-1.991-.34-2.755-.906-.425-.319-.811-.698-1.137-1.137-.453-.604-.792-1.302-.906-2.075-.057-.377-.057-.755 0-1.132.057-.377.189-.736.377-1.066.189-.33.434-.623.717-.868z"/>
+  </svg>
+);
+
