@@ -3,8 +3,11 @@ import { Button } from '@/components/ui/button';
 import CountdownTimer from '@/components/CountdownTimer';
 import Footer from '@/components/Footer';
 import { ArrowRight, Star, Users, BookOpen, Trophy, MessageCircle } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
 const Index = () => {
+  const [showWhatsApp, setShowWhatsApp] = useState(false);
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -15,6 +18,18 @@ const Index = () => {
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Show WhatsApp button after scrolling past the hero section (approximately 80vh)
+      const scrollPosition = window.scrollY;
+      const showThreshold = window.innerHeight * 0.8;
+      setShowWhatsApp(scrollPosition > showThreshold);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <div className="min-h-screen relative">
@@ -333,14 +348,16 @@ const Index = () => {
         </div>
       </section>
 
-      {/* WhatsApp Chat Button - Fixed Position */}
-      <button
-        onClick={handleWhatsAppClick}
-        className="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-2xl transition-all duration-300 transform hover:scale-110 hover:shadow-3xl animate-pulse"
-        aria-label="Chat on WhatsApp"
-      >
-        <MessageCircle size={24} className="fill-current" />
-      </button>
+      {/* WhatsApp Chat Button - Fixed Position with conditional visibility */}
+      {showWhatsApp && (
+        <button
+          onClick={handleWhatsAppClick}
+          className="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-2xl transition-all duration-300 transform hover:scale-110 hover:shadow-3xl animate-pulse"
+          aria-label="Chat on WhatsApp"
+        >
+          <MessageCircle size={24} className="fill-current" />
+        </button>
+      )}
 
       <Footer />
     </div>
