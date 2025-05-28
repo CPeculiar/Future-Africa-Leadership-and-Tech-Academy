@@ -1,6 +1,7 @@
 
 import { Link } from 'react-router-dom';
-import { Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
+import { Facebook, Twitter, Instagram, Youtube } from 'lucide-react';
+import { MessageCircle, AtSign } from 'lucide-react'; // Using MessageCircle for TikTok and AtSign for Threads
 
 const Footer = () => {
   const scrollToTop = () => {
@@ -86,13 +87,21 @@ const Footer = () => {
                 <span className="sr-only">Twitter</span>
                 <Twitter size={24} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-blue-600 transition-colors">
-                <span className="sr-only">LinkedIn</span>
-                <Linkedin size={24} />
+              <a href="#" className="text-gray-400 hover:text-red-600 transition-colors">
+                <span className="sr-only">YouTube</span>
+                <Youtube size={24} />
+              </a>
+              <a href="#" className="text-gray-400 hover:text-black transition-colors">
+                <span className="sr-only">TikTok</span>
+                <MessageCircle size={24} />
               </a>
               <a href="#" className="text-gray-400 hover:text-pink-500 transition-colors">
                 <span className="sr-only">Instagram</span>
                 <Instagram size={24} />
+              </a>
+              <a href="#" className="text-gray-400 hover:text-purple-500 transition-colors">
+                <span className="sr-only">Threads</span>
+                <AtSign size={24} />
               </a>
             </div>
           </div>
