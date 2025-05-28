@@ -31,14 +31,14 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 sm:h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2 transform transition-all duration-300 hover:scale-105" onClick={scrollToTop}>
+          <Link to="/" className="flex items-center space-x-2" onClick={scrollToTop}>
             <img 
-              src="/favicon.ico" 
+              src="/FALATA.jpg" 
               alt="FALATA Logo" 
-              className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg object-cover transition-all duration-300 hover:shadow-lg"
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg object-cover"
             />
             <div className="hidden sm:block">
-              <h1 className="text-lg sm:text-xl font-bold text-gray-900 transition-colors duration-300 hover:text-purple-600">FALATA</h1>
+              <h1 className="text-lg sm:text-xl font-bold text-gray-900">FALATA</h1>
               <p className="text-xs text-gray-600">Future Africa Leadership & Tech Academy</p>
             </div>
           </Link>
@@ -50,12 +50,11 @@ const Header = () => {
                 key={item.name}
                 to={item.path}
                 onClick={scrollToTop}
-                className={`text-sm font-medium transition-all duration-300 hover:text-purple-600 hover:scale-105 relative group ${
+                className={`text-sm font-medium transition-colors hover:text-purple-600 ${
                   isActive(item.path) ? 'text-purple-600' : 'text-gray-700'
                 }`}
               >
                 {item.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-600 transition-all duration-300 group-hover:w-full"></span>
               </Link>
             ))}
           </nav>
@@ -64,45 +63,44 @@ const Header = () => {
           <Button
             variant="ghost"
             size="icon"
-            className="md:hidden p-2 transition-all duration-300 hover:bg-purple-100"
+            className="md:hidden p-2"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
             <div className="w-6 h-6 flex flex-col justify-center items-center">
-              <span className={`bg-gray-600 block h-0.5 w-6 rounded-sm transition-all duration-700 ease-in-out ${isMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`}></span>
-              <span className={`bg-gray-600 block h-0.5 w-6 rounded-sm transition-all duration-700 ease-in-out my-0.5 ${isMenuOpen ? 'opacity-0' : ''}`}></span>
-              <span className={`bg-gray-600 block h-0.5 w-6 rounded-sm transition-all duration-700 ease-in-out ${isMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></span>
+              <span className={`bg-gray-600 block h-0.5 w-6 rounded-sm transition-all duration-500 ease-in-out ${isMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`}></span>
+              <span className={`bg-gray-600 block h-0.5 w-6 rounded-sm transition-all duration-500 ease-in-out my-0.5 ${isMenuOpen ? 'opacity-0' : ''}`}></span>
+              <span className={`bg-gray-600 block h-0.5 w-6 rounded-sm transition-all duration-500 ease-in-out ${isMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></span>
             </div>
           </Button>
         </div>
 
         {/* Mobile Navigation with enhanced smooth transitions */}
-        <div className={`md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-xl transition-all duration-1000 ease-in-out ${
+        <div className={`md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-xl transition-all duration-700 ease-in-out ${
           isMenuOpen 
             ? 'opacity-100 max-h-96 translate-y-0 visible' 
-            : 'opacity-0 max-h-0 -translate-y-8 invisible'
+            : 'opacity-0 max-h-0 -translate-y-4 invisible'
         } overflow-hidden`}>
           <nav className="px-4 py-6">
-            <div className="space-y-2">
+            <div className="space-y-4">
               {navItems.map((item, index) => (
                 <Link
                   key={item.name}
                   to={item.path}
-                  className={`block text-base font-medium transition-all duration-1000 ease-in-out hover:text-purple-600 hover:translate-x-4 py-4 px-6 rounded-xl hover:bg-gradient-to-r hover:from-purple-50 hover:to-indigo-50 transform relative overflow-hidden group ${
-                    isActive(item.path) ? 'text-purple-600 bg-gradient-to-r from-purple-50 to-indigo-50 translate-x-2' : 'text-gray-700'
+                  className={`block text-base font-medium transition-all duration-700 ease-in-out hover:text-purple-600 hover:translate-x-3 py-3 px-4 rounded-xl hover:bg-purple-50 transform ${
+                    isActive(item.path) ? 'text-purple-600 bg-purple-50 translate-x-2' : 'text-gray-700'
                   } ${isMenuOpen 
-                    ? 'opacity-100 translate-y-0 scale-100' 
-                    : 'opacity-0 translate-y-8 scale-95'
+                    ? 'opacity-100 translate-y-0' 
+                    : 'opacity-0 translate-y-4'
                   }`}
                   style={{
-                    transitionDelay: isMenuOpen ? `${index * 150 + 300}ms` : `${(navItems.length - index) * 75}ms`
+                    transitionDelay: isMenuOpen ? `${index * 100 + 200}ms` : `${(navItems.length - index) * 50}ms`
                   }}
                   onClick={handleLinkClick}
                 >
-                  <span className="inline-block transition-transform duration-500 group-hover:scale-110">
+                  <span className="inline-block transition-transform duration-300 hover:scale-105">
                     {item.name}
                   </span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-purple-100 to-indigo-100 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"></div>
                 </Link>
               ))}
             </div>
