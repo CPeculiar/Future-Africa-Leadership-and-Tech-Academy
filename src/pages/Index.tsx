@@ -4,6 +4,14 @@ import CountdownTimer from '@/components/CountdownTimer';
 import Footer from '@/components/Footer';
 import { ArrowRight, Star, Users, BookOpen, Trophy, MessageCircle } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import heroIMG from '/test3.jpg'
+import TECH from '/test7.jpg'
+import LEAD from '/test5.jpg'
+// import aboutIMG from '/test1.png'
+import aboutIMG from '/test1.png'
+import aboutIMG2 from '/pic5.jpg'
+import aboutIMG3 from '/test9.jpg'
+
 
 const Index = () => {
   const [showWhatsApp, setShowWhatsApp] = useState(false);
@@ -63,16 +71,16 @@ const Index = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <Button asChild size="lg" className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-black font-bold text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 rounded-full shadow-2xl transform hover:scale-105 transition-all">
                   <Link to="/apply/leadership" onClick={scrollToTop}>
-                    Start Leadership Journey
+                    Start Your Leadership Journey
                     <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
                   </Link>
                 </Button>
                 <Button asChild size="lg" className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 rounded-full backdrop-blur-sm">
-                  <Link to="/apply/tech" onClick={scrollToTop}>Join Tech Academy</Link>
+                  <Link to="/apply/tech" onClick={scrollToTop}>Join Our Tech Academy</Link>
                 </Button>
               </div>
 
-              <div className="flex items-center justify-center lg:justify-start space-x-6 sm:space-x-8 pt-6 sm:pt-8">
+              {/* <div className="flex items-center justify-center lg:justify-start space-x-6 sm:space-x-8 pt-6 sm:pt-8">
                 <div className="text-center">
                   <div className="text-2xl sm:text-3xl font-bold text-yellow-400">500+</div>
                   <div className="text-xs sm:text-sm text-slate-400">Graduates</div>
@@ -85,15 +93,16 @@ const Index = () => {
                   <div className="text-2xl sm:text-3xl font-bold text-yellow-400">50+</div>
                   <div className="text-xs sm:text-sm text-slate-400">Partners</div>
                 </div>
-              </div>
+              </div> */}
             </div>
             
             <div className="relative mt-8 lg:mt-0">
               <div className="relative z-10">
                 <img 
-                  src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=500&fit=crop" 
+                  // src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=500&fit=crop"
+                  src={heroIMG} 
                   alt="Students collaborating" 
-                  className="rounded-3xl shadow-2xl w-full max-w-lg mx-auto"
+                  className="rounded-3xl shadow-2xl w-full max-w-full mx-auto"
                 />
                 <div className="absolute -bottom-4 sm:-bottom-6 -right-4 sm:-right-6 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-2xl p-4 sm:p-6 shadow-xl">
                   <div className="text-black font-bold text-base sm:text-lg">Next Cohort</div>
@@ -140,7 +149,8 @@ const Index = () => {
               </div>
               
               <img 
-                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=300&fit=crop" 
+                // src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=300&fit=crop"
+                src={LEAD} 
                 alt="Leadership training" 
                 className="w-full h-48 sm:h-56 object-cover rounded-2xl mb-6 sm:mb-8 group-hover:scale-105 transition-transform duration-500"
               />
@@ -155,7 +165,12 @@ const Index = () => {
                   'Strategic Leadership & Vision',
                   'Public Speaking & Influence',
                   'Project & Team Management',
-                  'Innovation & Entrepreneurship'
+                  'Innovation & Entrepreneurship',
+                  'Coaching & Mentorship for Leaders',
+                  'Leadership in Crisis & Risk Management',
+                  'Community Leadership & Civic Engagement',
+                  'Emotional Intelligence & Conflict Resolution',
+                  'Executive Communication & Presentation Skills',
                 ].map((item, index) => (
                   <div key={index} className="flex items-center">
                     <div className="w-2 h-2 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full mr-4"></div>
@@ -176,7 +191,8 @@ const Index = () => {
               </div>
               
               <img 
-                src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=600&h=300&fit=crop" 
+                // src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=600&h=300&fit=crop" 
+                src={TECH}
                 alt="Tech training" 
                 className="w-full h-48 sm:h-56 object-cover rounded-2xl mb-6 sm:mb-8 group-hover:scale-105 transition-transform duration-500"
               />
@@ -188,10 +204,15 @@ const Index = () => {
               
               <div className="space-y-3 mb-6 sm:mb-8">
                 {[
+                  'Mobile Video Editing & Animation',
+                  'Web Development & Design',
                   'Software Development & AI',
                   'Data Science & Analytics',
                   'Digital Marketing & Growth',
-                  'Cybersecurity & Cloud Tech'
+                  'Cybersecurity & Cloud Tech',
+                  'Graphics Designing & Multimedia',
+                  'No-Code / Low-Code Development',
+                  'Tech Entrepreneurship & Startup Launchpad',
                 ].map((item, index) => (
                   <div key={index} className="flex items-center">
                     <div className="w-2 h-2 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-full mr-4"></div>
@@ -226,12 +247,13 @@ const Index = () => {
               </h2>
               
               <p className="text-lg sm:text-xl text-slate-300 leading-relaxed">
-                FALATA bridges the gap between potential and excellence through world-class training programs that combine traditional leadership wisdom with cutting-edge technology skills.
+                FALATA bridges the gap between potential and excellence through world-class training 
+                programs that combine traditional leadership wisdom with cutting-edge technology skills.
               </p>
               
               <div className="grid grid-cols-2 gap-6 sm:gap-8">
                 <div className="text-center lg:text-left">
-                  <div className="text-2xl sm:text-3xl font-bold text-yellow-400">15+</div>
+                  <div className="text-2xl sm:text-3xl font-bold text-yellow-400">9+</div>
                   <div className="text-slate-400 text-sm sm:text-base">Years Experience</div>
                 </div>
                 <div className="text-center lg:text-left">
@@ -252,7 +274,8 @@ const Index = () => {
               <div className="grid grid-cols-2 gap-4 sm:gap-6">
                 <div className="space-y-4 sm:space-y-6">
                   <img 
-                    src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=300&h=400&fit=crop" 
+                    // src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=300&h=400&fit=crop"
+                    src={aboutIMG} 
                     alt="Team collaboration" 
                     className="rounded-2xl shadow-xl w-full"
                   />
@@ -264,14 +287,16 @@ const Index = () => {
                 </div>
                 <div className="space-y-4 sm:space-y-6 pt-8 sm:pt-12">
                   <img 
-                    src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=300&h=300&fit=crop" 
+                    // src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=300&h=300&fit=crop" 
+                    src={aboutIMG2}
                     alt="Leadership meeting" 
-                    className="rounded-2xl shadow-xl w-full"
+                    className="rounded-2xl shadow-xl w-full sm:h-80 object-cover"
                   />
                   <img 
-                    src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=300&h=400&fit=crop" 
+                    // src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=300&h=400&fit=crop" 
+                    src={aboutIMG3}
                     alt="Students learning" 
-                    className="rounded-2xl shadow-xl w-full"
+                    className="rounded-2xl shadow-xl w-full sm:h-80 object-cover"
                   />
                 </div>
               </div>
@@ -304,8 +329,8 @@ const Index = () => {
               {
                 id: 1,
                 title: "Leadership Development Summit",
-                date: "June 2025",
-                location: "TLBC Auditorium, Kwata Awka",
+                date: "July 2025",
+                location: "TLBC Auditorium Awka, Anambra State.",
                 color: "from-purple-500 to-indigo-500"
               },
               {
@@ -319,7 +344,7 @@ const Index = () => {
                 id: 3,
                 title: "Tech Fest 2025",
                 date: "August 2025",
-                location: "Venue TBA",
+                location: "Venue: TBA",
                 color: "from-orange-500 to-red-500"
               }
             ].map((event, index) => (

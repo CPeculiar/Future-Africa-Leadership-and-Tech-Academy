@@ -38,9 +38,9 @@ const CountdownTimer = () => {
   return (
     <div className="bg-gradient-to-r from-orange-500 to-red-500 text-white py-4 sm:py-6 px-4 sm:px-8 rounded-2xl shadow-xl transform transition-all duration-300 hover:scale-105">
       <div className="flex items-center justify-center mb-3 sm:mb-4">
-        <Clock className="w-4 h-4 sm:w-5 sm:h-5 mr-2 animate-pulse" />
+        <Clock className="w-8 h-4 sm:w-5 sm:h-5 mr-2 animate-pulse" />
         <h3 className="text-sm sm:text-lg font-bold text-center">
-          Admission for June 2025 Cohort is closing soon!
+          Applications for the June 2025 Cohort will close on 10th June!
         </h3>
       </div>
       
