@@ -78,11 +78,11 @@ const Footer = () => {
               © 2025 Future Africa Leadership and Tech Academy (FALATA). All rights reserved.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-blue-500 transition-colors">
+              <a href="https://www.facebook.com/share/19MUXoUN9e/" className="text-gray-400 hover:text-blue-500 transition-colors">
                 <span className="sr-only">Facebook</span>
                 <Facebook size={24} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors">
+              <a href="https://x.com/FALATA_Official" className="text-gray-400 hover:text-blue-400 transition-colors">
                 <span className="sr-only">Twitter</span>
                 <Twitter size={24} />
               </a>
