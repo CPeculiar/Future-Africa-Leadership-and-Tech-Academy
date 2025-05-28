@@ -2,15 +2,22 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import CountdownTimer from '@/components/CountdownTimer';
 import Footer from '@/components/Footer';
-import { ArrowRight, Star, Users, BookOpen, Trophy } from 'lucide-react';
+import { ArrowRight, Star, Users, BookOpen, Trophy, MessageCircle } from 'lucide-react';
 
 const Index = () => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleWhatsAppClick = () => {
+    const phoneNumber = "2349060121720"; // Nigerian format with country code
+    const message = "Hello! I'm interested in FALATA programs.";
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen relative">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-purple-900 via-indigo-900 to-slate-900 text-white py-20 sm:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-purple-900/80 to-transparent"></div>
@@ -325,6 +332,15 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* WhatsApp Chat Button - Fixed Position */}
+      <button
+        onClick={handleWhatsAppClick}
+        className="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-2xl transition-all duration-300 transform hover:scale-110 hover:shadow-3xl animate-pulse"
+        aria-label="Chat on WhatsApp"
+      >
+        <MessageCircle size={24} className="fill-current" />
+      </button>
 
       <Footer />
     </div>
