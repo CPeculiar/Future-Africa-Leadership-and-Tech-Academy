@@ -1,5 +1,6 @@
 
-import { Facebook, Twitter, Linkedin, Youtube, Instagram } from 'lucide-react';
+import { Facebook, Twitter, Youtube, Instagram } from 'lucide-react';
+import { MessageCircle, AtSign } from 'lucide-react'; // Using MessageCircle for TikTok and AtSign for Threads
 
 const StayConnected = () => {
   return (
@@ -12,7 +13,7 @@ const StayConnected = () => {
         
         <div className="flex justify-center space-x-4 sm:space-x-6">
           <a 
-            href="#" 
+            href="https://www.facebook.com/share/19MUXoUN9e/" 
             className="w-12 h-12 sm:w-14 sm:h-14 bg-blue-600 hover:bg-blue-700 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
             aria-label="Facebook"
           >
@@ -20,19 +21,11 @@ const StayConnected = () => {
           </a>
           
           <a 
-            href="#" 
+            href="https://x.com/FALATA_Official" 
             className="w-12 h-12 sm:w-14 sm:h-14 bg-blue-400 hover:bg-blue-500 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
             aria-label="Twitter"
           >
             <Twitter className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
-          </a>
-          
-          <a 
-            href="#" 
-            className="w-12 h-12 sm:w-14 sm:h-14 bg-blue-700 hover:bg-blue-800 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
-            aria-label="LinkedIn"
-          >
-            <Linkedin className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
           </a>
           
           <a 
@@ -45,10 +38,26 @@ const StayConnected = () => {
           
           <a 
             href="#" 
+            className="w-12 h-12 sm:w-14 sm:h-14 bg-black hover:bg-gray-800 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
+            aria-label="TikTok"
+          >
+            <MessageCircle className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
+          </a>
+          
+          <a 
+            href="#" 
             className="w-12 h-12 sm:w-14 sm:h-14 bg-pink-600 hover:bg-pink-700 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
             aria-label="Instagram"
           >
             <Instagram className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
+          </a>
+
+          <a 
+            href="#" 
+            className="w-12 h-12 sm:w-14 sm:h-14 bg-purple-600 hover:bg-purple-700 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
+            aria-label="Threads"
+          >
+            <AtSign className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
           </a>
         </div>
       </div>
