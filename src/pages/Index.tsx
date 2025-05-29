@@ -271,33 +271,57 @@ const Index = () => {
             </div>
             
             <div className="relative mt-8 lg:mt-0">
-              <div className="grid grid-cols-2 gap-4 sm:gap-6">
-                <div className="space-y-4 sm:space-y-6">
+              {/* Mobile Layout */}
+              <div className="block lg:hidden space-y-6">
+                <div className="relative">
                   <img 
-                    // src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=300&h=400&fit=crop"
                     src={aboutIMG} 
                     alt="Team collaboration" 
-                    className="rounded-2xl shadow-xl w-full"
+                    className="rounded-2xl shadow-xl w-full h-64 object-cover"
                   />
-                  <img 
-                    src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=300&h=300&fit=crop" 
-                    alt="Tech innovation" 
-                    className="rounded-2xl shadow-xl w-full"
-                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-purple-900/60 via-transparent to-transparent rounded-2xl"></div>
                 </div>
-                <div className="space-y-4 sm:space-y-6 pt-8 sm:pt-12">
+                <div className="grid grid-cols-2 gap-4">
                   <img 
-                    // src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=300&h=300&fit=crop" 
                     src={aboutIMG2}
                     alt="Leadership meeting" 
-                    className="rounded-2xl shadow-xl w-full sm:h-80 object-cover"
+                    className="rounded-2xl shadow-xl w-full h-40 object-cover"
                   />
                   <img 
-                    // src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=300&h=400&fit=crop" 
                     src={aboutIMG3}
                     alt="Students learning" 
-                    className="rounded-2xl shadow-xl w-full sm:h-80 object-cover"
+                    className="rounded-2xl shadow-xl w-full h-40 object-cover"
                   />
+                </div>
+              </div>
+
+              {/* Desktop Layout */}
+              <div className="hidden lg:block">
+                <div className="grid grid-cols-2 gap-4 sm:gap-6">
+                  <div className="space-y-4 sm:space-y-6">
+                    <img 
+                      src={aboutIMG} 
+                      alt="Team collaboration" 
+                      className="rounded-2xl shadow-xl w-full"
+                    />
+                    <img 
+                      src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=300&h=300&fit=crop" 
+                      alt="Tech innovation" 
+                      className="rounded-2xl shadow-xl w-full"
+                    />
+                  </div>
+                  <div className="space-y-4 sm:space-y-6 pt-8 sm:pt-12">
+                    <img 
+                      src={aboutIMG2}
+                      alt="Leadership meeting" 
+                      className="rounded-2xl shadow-xl w-full sm:h-80 object-cover"
+                    />
+                    <img 
+                      src={aboutIMG3}
+                      alt="Students learning" 
+                      className="rounded-2xl shadow-xl w-full sm:h-80 object-cover"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
