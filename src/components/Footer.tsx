@@ -2,6 +2,8 @@
 import { Link } from 'react-router-dom';
 import { Facebook, Twitter, Instagram, Youtube } from 'lucide-react';
 import { MessageCircle, AtSign } from 'lucide-react'; // Using MessageCircle for TikTok and AtSign for Threads
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faThreads } from '@fortawesome/free-brands-svg-icons';
 
 const Footer = () => {
   const scrollToTop = () => {
@@ -79,29 +81,29 @@ const Footer = () => {
               © 2025 Future Africa Leadership and Tech Academy (FALATA). All rights reserved.
             </p>
             <div className="flex space-x-4">
-              <a href="https://www.facebook.com/share/19MUXoUN9e/" className="text-gray-400 hover:text-blue-500 transition-colors">
+              <a href="https://www.facebook.com/share/1DZd8b2Tp2" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-500 transition-colors">
                 <span className="sr-only">Facebook</span>
                 <Facebook size={24} />
               </a>
-              <a href="https://x.com/FALATA_Official" className="text-gray-400 hover:text-blue-400 transition-colors">
+              <a href="https://x.com/FALATA_Official" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-400 transition-colors">
                 <span className="sr-only">Twitter</span>
                 <Twitter size={24} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-red-600 transition-colors">
+              <a href="https://youtube.com/@falataofficial" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-red-600 transition-colors">
                 <span className="sr-only">YouTube</span>
                 <Youtube size={24} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-black transition-colors">
+              <a href="http://tiktok.com/@falata_official" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-black transition-colors">
                 <span className="sr-only">TikTok</span>
                 <TikTokIcon size={24} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-pink-500 transition-colors">
+              <a href="https://www.instagram.com/falata.official" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-pink-500 transition-colors">
                 <span className="sr-only">Instagram</span>
                 <Instagram size={24} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-purple-500 transition-colors">
+              <a href="https://www.threads.net/@falata.official" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-purple-500 transition-colors">
                 <span className="sr-only">Threads</span>
-                <ThreadsIcon size={24} />
+                 <FontAwesomeIcon icon={faThreads} className="w-6 h-6" />
               </a>
             </div>
           </div>

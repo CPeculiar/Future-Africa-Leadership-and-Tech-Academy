@@ -102,7 +102,7 @@ const Index = () => {
                   // src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=500&fit=crop"
                   src={heroIMG} 
                   alt="Students collaborating" 
-                  className="rounded-3xl shadow-2xl w-full max-w-full mx-auto"
+                  className="rounded-3xl shadow-2xl w-full max-w-full mx-auto transform transition-transform duration-500 hover:scale-105"
                 />
                 <div className="absolute -bottom-4 sm:-bottom-6 -right-4 sm:-right-6 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-2xl p-4 sm:p-6 shadow-xl">
                   <div className="text-black font-bold text-base sm:text-lg">Next Cohort</div>
