@@ -15,7 +15,7 @@ const StayConnected = () => {
         
         <div className="flex justify-center space-x-4 sm:space-x-6">
           <a 
-            href="https://www.facebook.com/share/1DZd8b2Tp2" 
+            href="https://www.facebook.com/share/1DZd8b2Tp2" target="_blank" rel="noopener noreferrer"
             className="w-12 h-12 sm:w-14 sm:h-14 bg-blue-600 hover:bg-blue-700 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
             aria-label="Facebook"
           >
@@ -23,7 +23,7 @@ const StayConnected = () => {
           </a>
           
           <a 
-            href="https://x.com/FALATA_Official" 
+            href="https://x.com/FALATA_Official"  target="_blank" rel="noopener noreferrer"
             className="w-12 h-12 sm:w-14 sm:h-14 bg-blue-400 hover:bg-blue-500 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
             aria-label="Twitter"
           >
@@ -31,7 +31,7 @@ const StayConnected = () => {
           </a>
           
           <a 
-            href="https://youtube.com/@falataofficial" 
+            href="https://youtube.com/@falataofficial" target="_blank" rel="noopener noreferrer"
             className="w-12 h-12 sm:w-14 sm:h-14 bg-red-600 hover:bg-red-700 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
             aria-label="YouTube"
           >
@@ -39,7 +39,7 @@ const StayConnected = () => {
           </a>
           
           <a 
-            href="http://tiktok.com/@falata_official" 
+            href="http://tiktok.com/@falata_official" target="_blank" rel="noopener noreferrer"
             className="w-12 h-12 sm:w-14 sm:h-14 bg-black hover:bg-gray-800 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
             aria-label="TikTok"
           >
@@ -47,7 +47,7 @@ const StayConnected = () => {
           </a>
           
           <a 
-            href="https://www.instagram.com/falata.official" 
+            href="https://www.instagram.com/falata.official" target="_blank" rel="noopener noreferrer"
             className="w-12 h-12 sm:w-14 sm:h-14 bg-pink-600 hover:bg-pink-700 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
             aria-label="Instagram"
           >
@@ -55,7 +55,7 @@ const StayConnected = () => {
           </a>
 
           <a 
-            href="https://www.threads.net/@falata.official" 
+            href="https://www.threads.net/@falata.official" target="_blank" rel="noopener noreferrer"
             className="w-12 h-12 sm:w-14 sm:h-14 bg-purple-600 hover:bg-purple-700 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
             aria-label="Threads"
           >

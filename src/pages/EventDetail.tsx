@@ -13,13 +13,13 @@ const EventDetail = () => {
       date: "June 2025",
       time: "9:00 AM - 5:00 PM",
       venue: "TLBC Auditorium",
-      address: "3 Uche Ekwunife Crescent, Kwata Awka",
+      address: "3 Uche Ekwunife Crescent, Awka",
       type: "Physical Event",
-      capacity: "200 participants",
+      capacity: "100 participants",
       description: "Join us for an intensive leadership development summit featuring industry experts and networking opportunities.",
       fullDescription: "Our Leadership Development Summit is a comprehensive day-long event designed to equip emerging and established leaders with the tools, strategies, and insights needed to excel in today's dynamic environment. The summit features keynote speakers, interactive workshops, panel discussions, and extensive networking opportunities.",
       agenda: [
-        "9:00 AM - Registration & Welcome Coffee",
+        "9:00 AM - Registration & Documentation",
         "10:00 AM - Opening Keynote: The Future of Leadership in Africa",
         "11:30 AM - Workshop: Strategic Thinking and Decision Making",
         "1:00 PM - Networking Lunch",
@@ -38,13 +38,13 @@ const EventDetail = () => {
       type: "Online Event",
       capacity: "100 participants",
       description: "Our flagship tech training program starts with comprehensive courses in modern technologies.",
-      fullDescription: "The Tech Academy Cohort 1 Training is an intensive 16-week program designed to transform beginners into job-ready tech professionals. Our comprehensive curriculum covers multiple tech tracks with hands-on projects and mentorship.",
+      fullDescription: "The Tech Academy Cohort 1 Training is an intensive 12-week program designed to transform beginners into job-ready tech professionals. Our comprehensive curriculum covers multiple tech tracks with hands-on projects and mentorship.",
       agenda: [
         "Week 1-2: Foundation & Computer Literacy",
-        "Week 3-6: Core Technical Skills",
-        "Week 7-10: Specialized Track Training",
-        "Week 11-14: Project Development",
-        "Week 15-16: Portfolio Building & Job Preparation"
+        "Week 3-4: Core Technical Skills",
+        "Week 5-8: Specialized Track Training",
+        "Week 9-10: Project Development",
+        "Week 11-12: Portfolio Building & Job Preparation"
       ],
       applicationType: "tech"
     },
@@ -55,7 +55,7 @@ const EventDetail = () => {
       venue: "Venue to be announced",
       address: "TBA",
       type: "Physical Event",
-      capacity: "500 participants",
+      capacity: "200 participants",
       description: "A celebration of technology and innovation featuring demos, competitions, and networking.",
       fullDescription: "Tech Fest 2025 is our annual celebration of technology, innovation, and the achievements of our tech community. The event features startup demos, coding competitions, tech exhibitions, and networking sessions with industry leaders.",
       agenda: [
