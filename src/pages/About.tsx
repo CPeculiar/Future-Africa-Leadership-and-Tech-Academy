@@ -1,6 +1,7 @@
 
 import Footer from '@/components/Footer';
 import StayConnected from '@/components/StayConnected';
+import LATA1 from '/LATA2.jpg'
 
 const About = () => {
   return (
@@ -30,7 +31,8 @@ const About = () => {
             </div>
             <div className="animate-scale-in">
               <img 
-                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=400&fit=crop" 
+                // src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=400&fit=crop"
+                src={LATA1} 
                 alt="Students learning" 
                 className="rounded-lg shadow-lg w-full h-auto transition-all duration-300 hover:scale-105 hover:shadow-xl"
               />

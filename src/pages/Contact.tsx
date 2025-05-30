@@ -1,24 +1,46 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import { submitContactForm } from "../services/firestore";
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
+import emailjs from "emailjs-com";
 import Footer from '@/components/Footer';
 import StayConnected from '@/components/StayConnected';
 import { Mail, Phone, MapPin } from 'lucide-react';
 
+  interface EmailConfig {
+  serviceId: string | undefined;
+  templateId: string | undefined;
+  publicKey: string | undefined;
+  toEmail: string | undefined;
+}
+
+const emailConfig: EmailConfig = {
+  serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID,
+  templateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+  publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+  toEmail: import.meta.env.VITE_TO_EMAIL
+};
+
+interface FormErrors {
+  [key: string]: string;
+}
+
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
+    phone: '',
     email: '',
     subject: '',
     message: ''
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formErrors, setFormErrors] = useState({});
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const navigate = useNavigate();
 
@@ -30,17 +52,43 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    try {
-      console.log('Contact Form submitted:', formData);
-      await submitContactForm(formData);
+     // Check if environment variables are loaded
+    if (!emailConfig.serviceId || !emailConfig.templateId || !emailConfig.publicKey) {
+      console.error('EmailJS configuration is missing. Please check your environment variables.');
+      alert('Configuration error. Please contact the administrator.');
+      setIsSubmitting(false);
+      return;
+    }
 
+    try {
+       const response = await emailjs.send(
+        emailConfig.serviceId,
+        emailConfig.templateId,
+        {
+          to_email: emailConfig.toEmail,
+          from_name: formData.name,
+          from_phone: formData.phone,
+          from_email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+        },
+        emailConfig.publicKey
+      );
+
+       if (response.status === 200) {
       alert('Thank you for your message! We will get back to you soon.');
       
-      setFormData({ name: '', email: '', subject: '', message: '' });
+      setFormData({ name: '', phone: '', email: '', subject: '', message: '' });
+      setIsSubmitting(false);
       console.log('Contact form submitted successfully');
+         } else {
+        alert("Failed to send message. Please try again.");
+        setIsSubmitting(false);
+      }
     } catch (error) {
       console.error('Error submitting contact form:', error);
       alert('Error submitting contact form. Please try again.');
+      setFormErrors({ form: `Form submission failed: ${(error as Error).message}` });
     } finally {
       setIsSubmitting(false);
     }
@@ -68,7 +116,7 @@ const Contact = () => {
               
               <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6 animate-scale-in">
                 <div className="transform transition-all duration-300 hover:scale-[1.02]">
-                  <Label htmlFor="name" className="text-sm sm:text-base">Name *</Label>
+                  <Label htmlFor="name" className="text-sm sm:text-base">Name <span className='text-red-600 font-bold'>*</span></Label>
                   <Input
                     id="name"
                     value={formData.name}
@@ -76,10 +124,22 @@ const Contact = () => {
                     required
                     className="mt-1 transition-all duration-300 focus:ring-2 focus:ring-purple-500"
                   />
+                  </div>
+
+                 <div className="transform transition-all duration-300 hover:scale-[1.02]">
+                  <Label htmlFor="phone" className="text-sm sm:text-base">Phone <span className='text-red-600 font-bold'>*</span></Label>
+                  <Input
+                    id="phone"
+                    type='tel'
+                    value={formData.phone}
+                    onChange={(e) => handleChange('phone', e.target.value)}
+                    required
+                    className="mt-1 transition-all duration-300 focus:ring-2 focus:ring-purple-500"
+                  />
                 </div>
                 
                 <div className="transform transition-all duration-300 hover:scale-[1.02]">
-                  <Label htmlFor="email" className="text-sm sm:text-base">Email *</Label>
+                  <Label htmlFor="email" className="text-sm sm:text-base">Email <span className='text-red-600 font-bold'>*</span></Label>
                   <Input
                     id="email"
                     type="email"
@@ -91,7 +151,7 @@ const Contact = () => {
                 </div>
                 
                 <div className="transform transition-all duration-300 hover:scale-[1.02]">
-                  <Label htmlFor="subject" className="text-sm sm:text-base">Subject *</Label>
+                  <Label htmlFor="subject" className="text-sm sm:text-base">Subject <span className='text-red-600 font-bold'>*</span></Label>
                   <Input
                     id="subject"
                     value={formData.subject}
@@ -102,7 +162,7 @@ const Contact = () => {
                 </div>
                 
                 <div className="transform transition-all duration-300 hover:scale-[1.02]">
-                  <Label htmlFor="message" className="text-sm sm:text-base">Message *</Label>
+                  <Label htmlFor="message" className="text-sm sm:text-base">Message <span className='text-red-600 font-bold'>*</span></Label>
                   <Textarea
                     id="message"
                     rows={6}
@@ -132,7 +192,8 @@ const Contact = () => {
                   <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-purple-600 mt-1 mr-3 sm:mr-4 flex-shrink-0" />
                   <div>
                     <h3 className="font-semibold text-gray-900 text-sm sm:text-base">Our Location</h3>
-                    <p className="text-gray-600 text-sm sm:text-base">3 Uche Ekwunife Crescent<br />Kwata Awka, Nigeria</p>
+                    <p className="text-gray-600 text-sm sm:text-base">3 Uche Ekwunife Crescent<br />Kwata Awka, Anambra State, <br />
+                     Nigeria</p>
                   </div>
                 </div>
                 
@@ -145,7 +206,7 @@ const Contact = () => {
                         href="tel:+2349060121720" 
                         className="hover:text-purple-600 transition-colors duration-300"
                       >
-                        09060121720
+                        +2349060121720
                       </a>
                     </p>
                   </div>

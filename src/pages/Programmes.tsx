@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import Footer from '@/components/Footer';
 import { BookOpen, Users, Trophy, Star } from 'lucide-react';
+import LATA1 from '/LATA1.jpg'
+import TECH from '/test2.jpg'
 
 const Programmes = () => {
   return (
@@ -44,9 +46,10 @@ const Programmes = () => {
               </div>
 
               <img 
-                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=300&fit=crop" 
+                // src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=300&fit=crop"
+                src={LATA1} 
                 alt="Leadership training" 
-                className="w-full h-48 sm:h-56 md:h-64 object-cover rounded-2xl shadow-lg"
+                className="w-full h-48 sm:h-56 md:h-96 object-cover rounded-2xl shadow-lg"
               />
 
               <div className="space-y-6">
@@ -59,12 +62,15 @@ const Programmes = () => {
                   <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4">Core Tracks</h3>
                   <div className="grid grid-cols-1 gap-3">
                     {[
-                      'Strategic Leadership & Vision Development',
-                      'Public Speaking & Communication Excellence',
-                      'Project Management & Team Leadership',
+                      'Strategic Leadership & Vision',
+                      'Public Speaking & Influence',
+                      'Project & Team Management',
                       'Innovation & Entrepreneurship',
-                      'Emotional Intelligence & Decision Making',
-                      'Change Management & Organizational Development'
+                      'Coaching & Mentorship for Leaders',
+                      'Leadership in Crisis & Risk Management',
+                      'Community Leadership & Civic Engagement',
+                      'Emotional Intelligence & Conflict Resolution',
+                      'Executive Communication & Presentation Skills',
                     ].map((item, index) => (
                       <div key={index} className="flex items-start">
                         <Star className="w-4 h-4 text-purple-600 mr-3 mt-0.5 flex-shrink-0" />
@@ -76,7 +82,7 @@ const Programmes = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 text-center">
                   <div className="bg-white p-3 sm:p-4 rounded-lg shadow-sm border">
-                    <div className="text-xl sm:text-2xl font-bold text-purple-600">12 Weeks</div>
+                    <div className="text-xl sm:text-2xl font-bold text-purple-600">10 Weeks</div>
                     <div className="text-xs sm:text-sm text-gray-600">Program Duration</div>
                   </div>
                   <div className="bg-white p-3 sm:p-4 rounded-lg shadow-sm border">
@@ -102,9 +108,10 @@ const Programmes = () => {
               </div>
 
               <img 
-                src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=600&h=300&fit=crop" 
-                alt="Tech training" 
-                className="w-full h-48 sm:h-56 md:h-64 object-cover rounded-2xl shadow-lg"
+                // src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=600&h=300&fit=crop"
+                src={TECH} 
+                alt="Tech training 64" 
+                className="w-full h-48 sm:h-56 md:h-96 object-cover rounded-2xl shadow-lg"
               />
 
               <div className="space-y-6">
@@ -117,12 +124,15 @@ const Programmes = () => {
                   <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4">Core Tracks</h3>
                   <div className="grid grid-cols-1 gap-3">
                     {[
-                      'Frontend Web Development (React, HTML, CSS)',
-                      'Mobile App Development & UI/UX Design',
+                      'Mobile Video Editing & Animation',
+                      'Web Development & Design',
+                      'Software Development & AI',
                       'Data Science & Analytics',
-                      'Digital Marketing & Social Media Management',
-                      'Cybersecurity Fundamentals',
-                      'Cloud Computing & DevOps'
+                      'Digital Marketing & Growth',
+                      'Cybersecurity & Cloud Tech',
+                      'Graphics Designing & Multimedia',
+                      'No-Code / Low-Code Development',
+                      'Tech Entrepreneurship & Startup Launchpad',
                     ].map((item, index) => (
                       <div key={index} className="flex items-start">
                         <Star className="w-4 h-4 text-emerald-600 mr-3 mt-0.5 flex-shrink-0" />
@@ -134,7 +144,7 @@ const Programmes = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
                   <div className="bg-white p-3 sm:p-4 rounded-lg shadow-sm border">
-                    <div className="text-lg sm:text-xl lg:text-2xl font-bold text-emerald-600">16 Weeks</div>
+                    <div className="text-lg sm:text-xl lg:text-2xl font-bold text-emerald-600">12 Weeks</div>
                     <div className="text-xs sm:text-sm text-gray-600">Duration</div>
                   </div>
                   <div className="bg-white p-3 sm:p-4 rounded-lg shadow-sm border">

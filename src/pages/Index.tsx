@@ -8,10 +8,13 @@ import { useState, useEffect } from 'react';
 import heroIMG from '/test3.jpg'
 import TECH from '/test7.jpg'
 import LEAD from '/test5.jpg'
-// import aboutIMG from '/test1.png'
 import aboutIMG from '/test1.png'
+import aboutIMG3 from '/pic3.jpg'
 import aboutIMG2 from '/pic5.jpg'
-import aboutIMG3 from '/test9.jpg'
+import aboutIMG4 from '/test9.jpg'
+import aboutIMG1 from '/pic2.jpg'
+import aboutIMG5 from '/pic7.jpg'
+import aboutIMG6 from '/pic10.jpg'
 
 
 const Index = () => {
@@ -19,9 +22,12 @@ const Index = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const missionImages = [
-    { src: aboutIMG, alt: "Team collaboration" },
-    { src: aboutIMG2, alt: "Leadership meeting" },
-    { src: aboutIMG3, alt: "Students learning" }
+    { src: aboutIMG1, alt: "Leadership Team" },
+    { src: aboutIMG3, alt: "2022 Graduation set" },
+    { src: aboutIMG5, alt: "2022 Graduating Students" },
+    { src: aboutIMG2, alt: "2023 Graduation set" },
+    { src: aboutIMG6, alt: "Collaborations" },
+    { src: aboutIMG4, alt: "Tech brainstorming" },
   ];
 
   const scrollToTop = () => {
@@ -272,7 +278,7 @@ const Index = () => {
               
               <div className="grid grid-cols-2 gap-6 sm:gap-8">
                 <div className="text-center lg:text-left">
-                  <div className="text-2xl sm:text-3xl font-bold text-yellow-400">9+</div>
+                  <div className="text-2xl sm:text-3xl font-bold text-yellow-400">8+</div>
                   <div className="text-slate-400 text-sm sm:text-base">Years Experience</div>
                 </div>
                 <div className="text-center lg:text-left">

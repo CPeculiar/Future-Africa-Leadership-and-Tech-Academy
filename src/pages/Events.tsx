@@ -11,7 +11,7 @@ const Events = () => {
       title: "Leadership Development Summit",
       date: "June 2025",
       venue: "TLBC Auditorium",
-      address: "3 Uche Ekwunife Crescent, Kwata Awka",
+      address: "3 Uche Ekwunife Crescent, Kwata Awka, Anambra State",
       type: "Physical Event",
       description: "Join us for an intensive leadership development summit featuring industry experts and networking opportunities.",
       hasApplication: true,
