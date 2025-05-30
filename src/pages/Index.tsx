@@ -1,3 +1,4 @@
+
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import CountdownTimer from '@/components/CountdownTimer';
@@ -271,15 +272,36 @@ const Index = () => {
             </div>
             
             <div className="relative mt-8 lg:mt-0">
-              {/* Mobile Layout - Single large image */}
-              <div className="block lg:hidden space-y-4">
+              {/* Mobile Layout - Three images displayed beautifully */}
+              <div className="block lg:hidden space-y-6">
+                {/* Main large image */}
                 <div className="relative">
                   <img 
                     src={aboutIMG} 
                     alt="Team collaboration" 
-                    className="rounded-2xl shadow-xl w-full h-80 object-cover"
+                    className="rounded-3xl shadow-2xl w-full h-72 object-cover transform hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-purple-900/40 via-transparent to-transparent rounded-2xl"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-purple-900/30 via-transparent to-transparent rounded-3xl"></div>
+                </div>
+                
+                {/* Two images side by side */}
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="relative">
+                    <img 
+                      src={aboutIMG2}
+                      alt="Leadership meeting" 
+                      className="rounded-2xl shadow-xl w-full h-48 object-cover transform hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-purple-900/20 to-transparent rounded-2xl"></div>
+                  </div>
+                  <div className="relative">
+                    <img 
+                      src={aboutIMG3}
+                      alt="Students learning" 
+                      className="rounded-2xl shadow-xl w-full h-48 object-cover transform hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-purple-900/20 to-transparent rounded-2xl"></div>
+                  </div>
                 </div>
               </div>
 
