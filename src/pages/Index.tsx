@@ -102,7 +102,7 @@ const Index = () => {
                   // src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=500&fit=crop"
                   src={heroIMG} 
                   alt="Students collaborating" 
-                  className="rounded-3xl shadow-2xl w-full max-w-full mx-auto transform transition-transform duration-500 hover:scale-105"
+                  className="rounded-3xl shadow-2xl w-full max-w-full mx-auto transform transition-transform duration-500 hover:scale-105 h-80 sm:h-auto object-cover"
                 />
                 <div className="absolute -bottom-4 sm:-bottom-6 -right-4 sm:-right-6 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-2xl p-4 sm:p-6 shadow-xl">
                   <div className="text-black font-bold text-base sm:text-lg">Next Cohort</div>
@@ -271,27 +271,15 @@ const Index = () => {
             </div>
             
             <div className="relative mt-8 lg:mt-0">
-              {/* Mobile Layout */}
-              <div className="block lg:hidden space-y-6">
+              {/* Mobile Layout - Single large image */}
+              <div className="block lg:hidden space-y-4">
                 <div className="relative">
                   <img 
                     src={aboutIMG} 
                     alt="Team collaboration" 
-                    className="rounded-2xl shadow-xl w-full h-64 object-cover"
+                    className="rounded-2xl shadow-xl w-full h-80 object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-purple-900/60 via-transparent to-transparent rounded-2xl"></div>
-                </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <img 
-                    src={aboutIMG2}
-                    alt="Leadership meeting" 
-                    className="rounded-2xl shadow-xl w-full h-40 object-cover"
-                  />
-                  <img 
-                    src={aboutIMG3}
-                    alt="Students learning" 
-                    className="rounded-2xl shadow-xl w-full h-40 object-cover"
-                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-purple-900/40 via-transparent to-transparent rounded-2xl"></div>
                 </div>
               </div>
 
