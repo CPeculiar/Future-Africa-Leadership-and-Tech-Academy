@@ -16,6 +16,13 @@ import aboutIMG3 from '/test9.jpg'
 
 const Index = () => {
   const [showWhatsApp, setShowWhatsApp] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const missionImages = [
+    { src: aboutIMG, alt: "Team collaboration" },
+    { src: aboutIMG2, alt: "Leadership meeting" },
+    { src: aboutIMG3, alt: "Students learning" }
+  ];
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -39,6 +46,17 @@ const Index = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Auto-slide effect for mission images
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => 
+        (prevIndex + 1) % missionImages.length
+      );
+    }, 3000); // Change image every 3 seconds
+
+    return () => clearInterval(interval);
+  }, [missionImages.length]);
 
   return (
     <div className="min-h-screen relative">
@@ -103,7 +121,7 @@ const Index = () => {
                   // src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=500&fit=crop"
                   src={heroIMG} 
                   alt="Students collaborating" 
-                  className="rounded-3xl shadow-2xl w-full max-w-full mx-auto transform transition-transform duration-500 hover:scale-105 h-80 sm:h-auto object-cover"
+                  className="rounded-3xl shadow-2xl w-full max-w-full mx-auto transform transition-transform duration-500 hover:scale-105 h-96 sm:h-auto object-cover"
                 />
                 <div className="absolute -bottom-4 sm:-bottom-6 -right-4 sm:-right-6 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-2xl p-4 sm:p-6 shadow-xl">
                   <div className="text-black font-bold text-base sm:text-lg">Next Cohort</div>
@@ -272,35 +290,46 @@ const Index = () => {
             </div>
             
             <div className="relative mt-8 lg:mt-0">
-              {/* Mobile Layout - Three images displayed beautifully */}
-              <div className="block lg:hidden space-y-6">
-                {/* Main large image */}
-                <div className="relative">
-                  <img 
-                    src={aboutIMG} 
-                    alt="Team collaboration" 
-                    className="rounded-3xl shadow-2xl w-full h-72 object-cover transform hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-purple-900/30 via-transparent to-transparent rounded-3xl"></div>
-                </div>
-                
-                {/* Two images side by side */}
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="relative">
-                    <img 
-                      src={aboutIMG2}
-                      alt="Leadership meeting" 
-                      className="rounded-2xl shadow-xl w-full h-48 object-cover transform hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-purple-900/20 to-transparent rounded-2xl"></div>
+              {/* Mobile Layout - Auto-sliding carousel */}
+              <div className="block lg:hidden">
+                <div className="relative overflow-hidden rounded-3xl shadow-2xl">
+                  {/* Carousel container */}
+                  <div 
+                    className="flex transition-transform duration-700 ease-in-out"
+                    style={{ transform: `translateX(-${currentImageIndex * 100}%)` }}
+                  >
+                    {missionImages.map((image, index) => (
+                      <div key={index} className="w-full flex-shrink-0 relative">
+                        <img 
+                          src={image.src}
+                          alt={image.alt}
+                          className="w-full h-80 object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-purple-900/40 via-transparent to-transparent"></div>
+                        {/* Image indicator text */}
+                        <div className="absolute bottom-4 left-4 right-4">
+                          <div className="bg-black/50 backdrop-blur-sm rounded-lg px-3 py-2">
+                            <p className="text-white text-sm font-medium">{image.alt}</p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                  <div className="relative">
-                    <img 
-                      src={aboutIMG3}
-                      alt="Students learning" 
-                      className="rounded-2xl shadow-xl w-full h-48 object-cover transform hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-purple-900/20 to-transparent rounded-2xl"></div>
+                  
+                  {/* Dots indicator */}
+                  <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                    {missionImages.map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setCurrentImageIndex(index)}
+                        className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                          index === currentImageIndex 
+                            ? 'bg-yellow-400 w-6' 
+                            : 'bg-white/50 hover:bg-white/80'
+                        }`}
+                        aria-label={`Go to slide ${index + 1}`}
+                      />
+                    ))}
                   </div>
                 </div>
               </div>
