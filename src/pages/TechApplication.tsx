@@ -610,116 +610,134 @@ const PayLaterSuccessModal = ({ onClose }: { onClose: () => void }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-2xl p-6 sm:p-8 max-w-lg w-full mx-4 shadow-2xl animate-fade-in max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-2 sm:p-4">
+      <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 max-w-xs sm:max-w-md lg:max-w-lg w-full mx-2 sm:mx-4 shadow-2xl animate-fade-in max-h-[95vh] sm:max-h-[90vh] overflow-y-auto">
         <div className="text-center">
-          <div className="mx-auto flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-purple-100 to-indigo-100 mb-6">
-            <CheckCircle className="w-8 h-8 text-purple-600" />
+          <div className="mx-auto flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gradient-to-r from-purple-100 to-indigo-100 mb-4 sm:mb-6">
+            <CheckCircle className="w-6 h-6 sm:w-8 sm:h-8 text-purple-600" />
           </div>
           
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">
+          <h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 mb-3 sm:mb-4 px-2">
             Application Submitted Successfully!
           </h2>
           
-          <div className="text-left mb-6">
-            <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-4">
-              <h3 className="font-bold text-amber-800 mb-2">⚠️ Important Payment Notice</h3>
-              <p className="text-amber-700 text-sm">
+           <div className="text-left mb-4 sm:mb-6 space-y-3 sm:space-y-4">
+            {/* Important Payment Notice */}
+            <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 sm:p-4">
+              <h3 className="font-bold text-amber-800 mb-2 text-sm sm:text-base flex items-start">
+                <span className="mr-1">⚠️</span>
+                <span>Important Payment Notice</span>
+              </h3>
+              <p className="text-amber-700 text-xs sm:text-sm leading-relaxed">
                 Your application has been received, but <strong>payment validates your application</strong>. 
                 Please complete payment to secure your spot in the June 2025 cohort.
               </p>
             </div>
 
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
-              <h3 className="font-bold text-blue-800 mb-3 flex items-center">
-                <CreditCard className="w-5 h-5 mr-2" />
+            {/* Payment Details */}
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 sm:p-4">
+              <h3 className="font-bold text-blue-800 mb-3 flex items-center text-sm sm:text-base">
+                <CreditCard className="w-4 h-4 sm:w-5 sm:h-5 mr-2 flex-shrink-0" />
                 Payment Details
               </h3>
-              <div className="space-y-3 text-sm">
-                <div className="bg-white p-3 rounded border">
-                  <p className="font-semibold text-gray-800">Account Number:</p>
-                  <div className="flex justify-between items-center">
-                    <span className="font-mono text-lg">0109461972</span>
+              <div className="space-y-2 sm:space-y-3 text-xs sm:text-sm">
+                {/* Account Number */}
+                <div className="bg-white p-2 sm:p-3 rounded border">
+                  <p className="font-semibold text-gray-800 mb-1">Account Number:</p>
+                  <div className="flex justify-between items-center gap-2">
+                    <span className="font-mono text-sm sm:text-lg font-bold break-all">0109461972</span>
                     <button 
                       onClick={() => copyToClipboard('0109461972')}
-                      className="text-blue-600 hover:text-blue-800 text-xs underline"
+                      className="text-blue-600 hover:text-blue-800 text-xs underline whitespace-nowrap flex-shrink-0 px-1"
                     >
                       Copy
                     </button>
                   </div>
                 </div>
                 
-                <div className="bg-white p-3 rounded border">
-                  <p className="font-semibold text-gray-800">Account Name:</p>
-                  <div className="flex justify-between items-center">
-                    <span>TLBC Partnership</span>
+                {/* Account Name */}
+                <div className="bg-white p-2 sm:p-3 rounded border">
+                  <p className="font-semibold text-gray-800 mb-1">Account Name:</p>
+                  <div className="flex justify-between items-center gap-2">
+                    <span className="break-words">TLBC Partnership</span>
                     <button 
                       onClick={() => copyToClipboard('TLBC Partnership')}
-                      className="text-blue-600 hover:text-blue-800 text-xs underline"
+                      className="text-blue-600 hover:text-blue-800 text-xs underline whitespace-nowrap flex-shrink-0 px-1"
                     >
                       Copy
                     </button>
                   </div>
                 </div>
                 
-                <div className="bg-white p-3 rounded border">
-                  <p className="font-semibold text-gray-800">Bank:</p>
+                {/* Bank */}
+                <div className="bg-white p-2 sm:p-3 rounded border">
+                  <p className="font-semibold text-gray-800 mb-1">Bank:</p>
                   <span>ACCESS Bank</span>
                 </div>
                 
-                <div className="bg-white p-3 rounded border">
-                  <p className="font-semibold text-gray-800">Amount:</p>
-                  <span className="font-semibold text-green-600">₦10,000</span>
+                {/* Amount */}
+                <div className="bg-white p-2 sm:p-3 rounded border">
+                  <p className="font-semibold text-gray-800 mb-1">Amount:</p>
+                  <span className="font-semibold text-green-600 text-sm sm:text-base">₦10,000</span>
                 </div>
               </div>
             </div>
 
-            <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-              <h3 className="font-bold text-green-800 mb-3">📧 Send Payment Proof</h3>
-              <p className="text-green-700 text-sm mb-3">
+            {/* Send Payment Proof */}
+            <div className="bg-green-50 border border-green-200 rounded-lg p-3 sm:p-4">
+              <h3 className="font-bold text-green-800 mb-2 sm:mb-3 text-sm sm:text-base">
+                📧 Send Payment Proof
+              </h3>
+              <p className="text-green-700 text-xs sm:text-sm mb-2 sm:mb-3 leading-relaxed">
                 After making payment, send your receipt/proof of payment to:
               </p>
               
-              <div className="space-y-2 text-sm">
-                <div className="flex items-center justify-between bg-white p-2 rounded border">
-                  <div className="flex items-center">
-                    <Phone className="w-4 h-4 mr-2 text-green-600" />
-                    <span>WhatsApp: 09060121720</span>
+              <div className="space-y-2 text-xs sm:text-sm">
+                {/* WhatsApp */}
+                <div className="bg-white p-2 rounded border">
+                  <div className="flex items-center justify-between gap-2">
+                    <div className="flex items-center min-w-0 flex-1">
+                      <Phone className="w-3 h-3 sm:w-4 sm:h-4 mr-2 text-green-600 flex-shrink-0" />
+                      <span className="break-all">WhatsApp: 09060121720</span>
+                    </div>
+                    <button 
+                      onClick={() => copyToClipboard('09060121720')}
+                      className="text-blue-600 hover:text-blue-800 text-xs underline whitespace-nowrap flex-shrink-0 px-1"
+                    >
+                      Copy
+                    </button>
                   </div>
-                  <button 
-                    onClick={() => copyToClipboard('09060121720')}
-                    className="text-blue-600 hover:text-blue-800 text-xs underline"
-                  >
-                    Copy
-                  </button>
                 </div>
                 
-                <div className="flex items-center justify-between bg-white p-2 rounded border">
-                  <div className="flex items-center">
-                    <Mail className="w-4 h-4 mr-2 text-green-600" />
-                    <span>Email: futureafrica.leadtech@gmail.com</span>
+                {/* Email */}
+                <div className="bg-white p-2 rounded border">
+                  <div className="flex items-center justify-between gap-2">
+                    <div className="flex items-center min-w-0 flex-1">
+                      <Mail className="w-3 h-3 sm:w-4 sm:h-4 mr-2 text-green-600 flex-shrink-0" />
+                      <span className="break-all">Email: futureafrica.leadtech@gmail.com</span>
+                    </div>
+                    <button 
+                      onClick={() => copyToClipboard('futureafrica.leadtech@gmail.com')}
+                      className="text-blue-600 hover:text-blue-800 text-xs underline whitespace-nowrap flex-shrink-0 px-1"
+                    >
+                      Copy
+                    </button>
                   </div>
-                  <button 
-                    onClick={() => copyToClipboard('futureafrica.leadtech@gmail.com')}
-                    className="text-blue-600 hover:text-blue-800 text-xs underline"
-                  >
-                    Copy
-                  </button>
                 </div>
               </div>
             </div>
           </div>
           
           <div className="space-y-3">
-            <p className="text-gray-600 text-sm">
-              We'll confirm your payment and send you further details about the program. Thank you
+            <p className="text-gray-600 text-xs sm:text-sm leading-relaxed px-2">
+              We'll confirm your application and send you further details about the program. Thank you!
             </p>
             
             <button
               onClick={onClose}
-              className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white py-3 px-6 rounded-lg font-medium transition-colors"
+              className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white py-2 sm:py-3 px-4 sm:px-6 rounded-lg font-medium transition-colors text-sm sm:text-base"
             >
-               Close
+              Close
             </button>
           </div>
         </div>
