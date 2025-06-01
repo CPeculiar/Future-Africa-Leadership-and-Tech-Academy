@@ -21,11 +21,13 @@ const About = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
             <div className="animate-fade-in">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 sm:mb-6">Our Mission</h2>
-              <p className="text-base sm:text-lg text-gray-600 mb-4 sm:mb-6 transition-all duration-300 hover:text-gray-800">
-                Future Africa Leadership and Tech Academy (FALATA) is dedicated to bridging the gap between potential and excellence. We provide world-class training that combines traditional leadership wisdom with cutting-edge technology skills.
+              <h2 className="text-2xl sm:text-3xl text-center md:text-4xl font-bold text-gray-900 mb-4 sm:mb-6">Our Mission</h2>
+              <p className="text-base text-justify sm:text-lg text-gray-600 mb-4 sm:mb-6 transition-all duration-300 hover:text-gray-800">
+                Future Africa Leadership and Tech Academy (FALATA) is an institute under the Elochukwu Udegbunam Foundation (E.U.F), 
+                dedicated to bridging the gap between potential and excellence. 
+                We provide world-class training that combines traditional leadership wisdom with cutting-edge technology skills.
               </p>
-              <p className="text-base sm:text-lg text-gray-600 transition-all duration-300 hover:text-gray-800">
+              <p className="text-base sm:text-lg text-justify text-gray-600 transition-all duration-300 hover:text-gray-800">
                 Our comprehensive programs are designed to prepare the next generation of African leaders for the challenges and opportunities of tomorrow.
               </p>
             </div>
