@@ -114,7 +114,7 @@ const EventDetail = () => {
             <div className="lg:col-span-2 space-y-8">
               <div>
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">About This Event</h2>
-                <p className="text-gray-600 leading-relaxed">{event.fullDescription}</p>
+                <p className="text-gray-600 leading-relaxed text-justify">{event.fullDescription}</p>
               </div>
 
               <div>
