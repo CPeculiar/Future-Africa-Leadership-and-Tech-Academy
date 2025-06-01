@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import Footer from '@/components/Footer';
@@ -5,6 +6,11 @@ import StayConnected from '@/components/StayConnected';
 import { Calendar, MapPin, Users } from 'lucide-react';
 
 const Events = () => {
+
+   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   const events = [
     {
       id: 1,

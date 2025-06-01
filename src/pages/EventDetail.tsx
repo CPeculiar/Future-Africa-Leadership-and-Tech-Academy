@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import Footer from '@/components/Footer';
@@ -6,6 +7,10 @@ import { Calendar, MapPin, Clock, Users } from 'lucide-react';
 
 const EventDetail = () => {
   const { id } = useParams();
+  
+    useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
   
   const events = {
     "1": {

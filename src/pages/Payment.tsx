@@ -1,7 +1,7 @@
-
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, CreditCard, Shield, CheckCircle } from 'lucide-react';
+import { PaystackButton } from 'react-paystack';
 import { Button } from '@/components/ui/button';
 
 interface PaymentData {
@@ -12,11 +12,21 @@ interface PaymentData {
   currency: string;
   payment_description: string;
 }
+interface PaystackResponse {
+  message: string;
+  reference: string;
+  status: string;
+  trans: string;
+  transaction: string;
+  trxref: string;
+}
 
 const Payment = () => {
   const navigate = useNavigate();
   const [paymentData, setPaymentData] = useState<PaymentData | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  const publicKey = import.meta.env.VITE_PAYSTACK_PUBLIC_KEY;
 
   useEffect(() => {
     // Get payment data from sessionStorage
@@ -27,70 +37,203 @@ const Payment = () => {
       // If no payment data, redirect back
       navigate('/apply/tech');
     }
-  }, [navigate]);
 
-  const handlePayment = () => {
-    if (!paymentData) return;
+  if (!publicKey) {
+      console.error('Paystack public key not found. Please add VITE_PAYSTACK_PUBLIC_KEY to your .env file');
+    }
+  }, [navigate, publicKey]);
 
+  const handlePaystackSuccessAction = async (reference: PaystackResponse) => {
+    console.log('Payment successful:', reference);
     setIsLoading(true);
 
-    // Flutterwave configuration
-    const flutterwaveConfig = {
-      public_key: "FLWPUBK_TEST-SANDBOXDEMOKEY-X", // Replace with your actual public key
-      tx_ref: `falata_tech_${Date.now()}`,
-      amount: paymentData.amount,
-      currency: paymentData.currency,
-      payment_options: "card,mobilemoney,ussd",
-      customer: {
-        email: paymentData.customer_email,
-        phone_number: paymentData.customer_phone,
-        name: paymentData.customer_name,
-      },
-      customizations: {
-        title: "FALATA Tech Academy",
-        description: paymentData.payment_description,
-        logo: "/src/assets/images/FALATA.jpg",
-      },
-      callback: function (data: any) {
-        console.log('Payment successful:', data);
-        // Verify payment on your server
-        verifyPayment(data.transaction_id);
-      },
-      onclose: function () {
-        console.log('Payment cancelled');
-        setIsLoading(false);
-      },
-    };
-
-    // Initialize Flutterwave payment
-    // @ts-ignore
-    window.FlutterwaveCheckout(flutterwaveConfig);
-  };
-
-  const verifyPayment = async (transactionId: string) => {
     try {
-      // Here you would verify the payment with your backend
-      // For now, we'll simulate a successful verification
-      console.log('Verifying payment:', transactionId);
-      
-      // Clear payment data
-      sessionStorage.removeItem('paymentData');
-      
-      // Redirect to success page
+      // await verifyPayment(reference.reference);
+      alert('Payment verified successfully!');
       navigate('/payment-success', { 
-        state: { 
-          transactionId, 
-          amount: paymentData?.amount,
-          name: paymentData?.customer_name 
-        } 
-      });
+          state: { 
+            transactionId: reference.reference,
+            transactionDetails: reference,
+            amount: paymentData?.amount,
+            name: paymentData?.customer_name,
+            paymentData: paymentData
+          } 
+        });
     } catch (error) {
       console.error('Payment verification failed:', error);
-      alert('Payment verification failed. Please contact support.');
+      alert('Payment verification failed. Please try again later.');
+      // Navigate to payment failure page or show error
+      navigate('/payment-failed', { 
+        state: {  
+          reference: reference.reference,
+          transactionDetails: reference,
+          amount: paymentData?.amount,
+          name: paymentData?.customer_name,
+          error: 'Payment verification failed'
+        } 
+      });
     } finally {
       setIsLoading(false);
     }
   };
+
+  const handleOnClose = (error: any) => {
+  console.error('Payment error:', error);
+  
+const interruptedTransactionDetails = {
+    reference: `interrupted_${Date.now()}`,
+    status: 'cancelled',
+    message: 'Payment process was interrupted',
+    trans: '',
+    trxref: `interrupted_${Date.now()}`,
+    transaction: `interrupted_${Date.now()}`
+  };
+  
+ navigate('/payment-failed', { 
+    state: { 
+      reference: `interrupted_${Date.now()}`,
+      transactionDetails: interruptedTransactionDetails,
+      amount: paymentData?.amount,
+      name: paymentData?.customer_name,
+      error: 'Payment process was interrupted or cancelled',
+      isUserCancellation: true // Flag to customize the failed page message
+    } 
+  });
+};
+
+  const handlePaystackCloseAction = () => {
+    console.log('Payment cancelled or failed');
+    
+    const tryAgain = window.confirm(
+    'Payment was not completed. Would you like to try again? Click "Cancel" to return to the application form.'
+  );
+
+   if (tryAgain) {
+    navigate('/apply/tech')
+  } else {
+    handleOnClose({ 
+      message: 'Payment was not completed. This could be due to cancellation or payment failure.' 
+    });
+  }
+
+    setIsLoading(false);
+  };
+
+  const verifyPayment = async (reference: string) => {
+    try {
+      // TODO: Replace with your actual backend endpoint
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/verify-payment`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${import.meta.env.VITE_PAYSTACK_SECRET_KEY}`, // This should be on your backend
+        },
+        body: JSON.stringify({ reference }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Payment verification failed');
+      }
+
+      const verificationResult = await response.json();
+      
+      if (verificationResult.data.status === 'success') {
+        // Clear payment data
+        sessionStorage.removeItem('paymentData');
+        
+        // Navigate to success page
+        navigate('/payment-success', { 
+          state: { 
+            transactionId: reference,
+            amount: paymentData?.amount,
+            name: paymentData?.customer_name,
+            paymentData: verificationResult.data
+          } 
+        });
+      } else {
+        throw new Error('Payment was not successful');
+      }
+    } catch (error) {
+      console.error('Payment verification error:', error);
+       // FIXED: Create a proper transaction object for failed payments
+    const failedTransactionDetails = {
+      reference: reference,
+      status: 'failed',
+      message: 'Payment verification failed',
+      trans: '',
+      trxref: reference,
+      transaction: reference
+    };
+    
+    // Navigate to payment failure page with proper data structure
+    navigate('/payment-failed', { 
+      state: { 
+        reference: reference,                    // Direct reference
+        transactionDetails: failedTransactionDetails, // Structured transaction details
+        amount: paymentData?.amount,
+        name: paymentData?.customer_name,
+        error: error.message || 'Payment verification failed'
+      } 
+    });
+      throw error;
+    }
+  };
+
+const paystackConfig = {
+    reference: `falata_tech_${Date.now()}`,
+    email: paymentData?.customer_email || '',
+    amount: (paymentData?.amount || 0) * 100, // Paystack expects amount in kobo (multiply by 100)
+    publicKey: publicKey || '',
+    text: 'Pay Now',
+    onSuccess: (reference: PaystackResponse) => handlePaystackSuccessAction(reference),
+    onClose: handlePaystackCloseAction,
+    onError: (error: any) => handlePaystackError(error),
+    metadata: {
+      custom_fields: [
+        {
+          display_name: "Customer Name",
+          variable_name: "customer_name",
+          value: paymentData?.customer_name || ''
+        },
+        {
+          display_name: "Phone Number",
+          variable_name: "phone_number", 
+          value: paymentData?.customer_phone || ''
+        },
+        {
+          display_name: "Course",
+          variable_name: "course",
+          value: "FALATA Tech Academy"
+        }
+      ]
+    },
+    currency: 'NGN', // Nigerian Naira
+    channels: ['card', 'bank', 'ussd', 'qr', 'mobile_money', 'bank_transfer'],
+  };
+
+  const handlePaystackError = (error: any) => {
+  console.error('Payment error:', error);
+  
+  const failedTransactionDetails = {
+    reference: `failed_${Date.now()}`,
+    status: 'failed',
+    message: 'Payment failed',
+    trans: '',
+    trxref: `failed_${Date.now()}`,
+    transaction: `failed_${Date.now()}`
+  };
+  
+  navigate('/payment-failed', { 
+    state: { 
+      reference: `failed_${Date.now()}`,
+      transactionDetails: failedTransactionDetails,
+      amount: paymentData?.amount,
+      name: paymentData?.customer_name,
+      error: error.message || 'Payment processing failed'
+    } 
+  });
+};
+
 
   if (!paymentData) {
     return (
@@ -102,11 +245,18 @@ const Payment = () => {
     );
   }
 
+  if (!publicKey) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-red-600 mb-4">Payment configuration error. Please contact support.</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 py-8 sm:py-16">
-      {/* Flutterwave Script */}
-      <script src="https://checkout.flutterwave.com/v3.js"></script>
-      
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-8 sm:mb-12">
@@ -162,10 +312,10 @@ const Payment = () => {
             </div>
           </div>
 
-          <Button
-            onClick={handlePayment}
+           <PaystackButton
+            className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold py-3 sm:py-4 rounded-lg text-base sm:text-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+            {...paystackConfig}
             disabled={isLoading}
-            className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold py-3 sm:py-4 rounded-lg text-base sm:text-lg"
           >
             {isLoading ? (
               <>
@@ -178,7 +328,7 @@ const Payment = () => {
                 Pay ₦{paymentData.amount.toLocaleString()}
               </>
             )}
-          </Button>
+          </PaystackButton>
         </div>
 
         {/* Security Features */}

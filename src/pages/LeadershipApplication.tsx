@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { submitFormApplication } from "../services/firestore";
 import { Button } from '@/components/ui/button';
@@ -11,26 +11,22 @@ import { CheckCircle } from 'lucide-react';
 
 const LeadershipApplication = () => {
   const [formData, setFormData] = useState({
-    fullName: '',
+    firstName: '',
+    lastName: '',
     email: '',
     phone: '',
-    dateOfBirth: '',
     gender: '',
     nationality: '',
-    stateOfOrigin: '',
-    currentAddress: '',
-    occupation: '',
-    organization: '',
-    educationLevel: '',
-    fieldOfStudy: '',
-    institution: '',
-    graduationYear: '',
-    leadershipExperience: '',
-    expectations: '',
     church: '',
     zone: '',
     department: '',
     office: '',
+    occupation: '',
+    organization: '',
+    educationLevel: '',
+    institution: '',
+    leadershipExperience: '',
+    expectations: '',
     hearAbout: ''
   });
 
@@ -38,6 +34,10 @@ const LeadershipApplication = () => {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const navigate = useNavigate();
 
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
+    
   // Church list with only names
   const churchList = [
     "TLBC Awka", "TLBC Ekwulobia", "TLBC Ihiala",
@@ -46,7 +46,7 @@ const LeadershipApplication = () => {
     "TLBCM FUTO", "TLBCM IMSU", "TLBCM Mgbakwu",
     "TLBCM NAU", "TLBCM Nekede", "TLBCM Oko",
     "TLBCM Okofia", "TLBCM UNILAG", "TLTN Agulu",
-    "TLTN Awka"
+    "TLTN Awka", "Others"
   ];
 
   // Zones list with only names
@@ -55,7 +55,8 @@ const LeadershipApplication = () => {
     "Ekwulobia zone", 
     "Nnewi zone",
     "Owerri zone",
-    "Onitsha zone"
+    "Onitsha zone",
+    "Others"
   ];
 
   const handleInputChange = (field: string, value: string) => {
@@ -73,26 +74,22 @@ const LeadershipApplication = () => {
       
       // Clear form
       setFormData({
-        fullName: '',
+        firstName: '',
+        lastName: '',
         email: '',
         phone: '',
-        dateOfBirth: '',
         gender: '',
         nationality: '',
-        stateOfOrigin: '',
-        currentAddress: '',
-        occupation: '',
-        organization: '',
-        educationLevel: '',
-        fieldOfStudy: '',
-        institution: '',
-        graduationYear: '',
-        leadershipExperience: '',
-        expectations: '',
         church: '',
         zone: '',
         department: '',
         office: '',
+        occupation: '',
+        organization: '',
+        educationLevel: '',
+        institution: '',
+        leadershipExperience: '',
+        expectations: '',
         hearAbout: ''
       });
     } catch (error) {
@@ -125,17 +122,27 @@ const LeadershipApplication = () => {
               
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <Label htmlFor="fullName">Full Name *</Label>
+                  <Label htmlFor="firstName">First Name <span className='text-red-600 font-bold'>*</span></Label>
                   <Input
-                    id="fullName"
-                    value={formData.fullName}
-                    onChange={(e) => handleInputChange('fullName', e.target.value)}
+                    id="firstName"
+                    value={formData.firstName}
+                    onChange={(e) => handleInputChange('firstName', e.target.value)}
                     required
                   />
                 </div>
                 
                 <div>
-                  <Label htmlFor="email">Email Address *</Label>
+                  <Label htmlFor="lastName">Last Name <span className='text-red-600 font-bold'>*</span></Label>
+                  <Input
+                    id="lastName"
+                    value={formData.lastName}
+                    onChange={(e) => handleInputChange('lastName', e.target.value)}
+                    required
+                  />
+                </div>
+                
+                <div>
+                  <Label htmlFor="email">Email Address <span className='text-red-600 font-bold'>*</span></Label>
                   <Input
                     id="email"
                     type="email"
@@ -145,43 +152,31 @@ const LeadershipApplication = () => {
                   />
                 </div>
                 
-                <div>
-                  <Label htmlFor="phone">Phone Number *</Label>
+              <div>
+                  <Label htmlFor="phone">Phone Number <span className='text-red-600 font-bold'>*</span></Label>
                   <Input
                     id="phone"
                     value={formData.phone}
                     onChange={(e) => handleInputChange('phone', e.target.value)}
                     required
-                  />
+                    />
                 </div>
                 
                 <div>
-                  <Label htmlFor="dateOfBirth">Date of Birth *</Label>
-                  <Input
-                    id="dateOfBirth"
-                    type="date"
-                    value={formData.dateOfBirth}
-                    onChange={(e) => handleInputChange('dateOfBirth', e.target.value)}
-                    required
-                  />
-                </div>
-                
-                <div>
-                  <Label htmlFor="gender">Gender *</Label>
-                  <Select onValueChange={(value) => handleInputChange('gender', value)}>
+                  <Label htmlFor="gender">Gender <span className='text-red-600 font-bold'>*</span></Label>
+                  <Select value={formData.gender} onValueChange={(value) => handleInputChange('gender', value)} required>
                     <SelectTrigger>
                       <SelectValue placeholder="Select gender" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="male">Male</SelectItem>
                       <SelectItem value="female">Female</SelectItem>
-                      <SelectItem value="other">Other</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
                 
                 <div>
-                  <Label htmlFor="nationality">Nationality *</Label>
+                  <Label htmlFor="nationality">Nationality <span className='text-red-600 font-bold'>*</span></Label>
                   <Input
                     id="nationality"
                     value={formData.nationality}
@@ -189,16 +184,34 @@ const LeadershipApplication = () => {
                     required
                   />
                 </div>
-              </div>
-              
-              <div className="mt-6">
-                <Label htmlFor="currentAddress">Current Address *</Label>
-                <Textarea
-                  id="currentAddress"
-                  value={formData.currentAddress}
-                  onChange={(e) => handleInputChange('currentAddress', e.target.value)}
-                  required
-                />
+                
+                  <div>
+                  <Label htmlFor="educationLevel">Highest Education Level <span className='text-red-600 font-bold'>*</span></Label>
+                  <Select value={formData.educationLevel} onValueChange={(value) => handleInputChange('educationLevel', value)} required>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select education level" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="secondary">Secondary School</SelectItem>
+                      <SelectItem value="diploma">Diploma</SelectItem>
+                      <SelectItem value="undergraduate">Undegraduate</SelectItem>
+                      <SelectItem value="bachelor">Bachelor's Degree</SelectItem>
+                      <SelectItem value="master">Master's Degree</SelectItem>
+                      <SelectItem value="phd">PhD</SelectItem>
+                      <SelectItem value="none">None</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                
+                <div>
+                  <Label htmlFor="institution">Institution attended <span className='text-red-600 font-bold'>*</span></Label>
+                  <Input
+                    id="institution"
+                    value={formData.institution}
+                    onChange={(e) => handleInputChange('institution', e.target.value)}
+                    required
+                  />
+                </div>
               </div>
             </div>
 
@@ -208,8 +221,8 @@ const LeadershipApplication = () => {
               
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <Label htmlFor="church">Church *</Label>
-                  <Select onValueChange={(value) => handleInputChange('church', value)}>
+                  <Label htmlFor="church">Church <span className='text-red-600 font-bold'>*</span></Label>
+                  <Select value={formData.church} onValueChange={(value) => handleInputChange('church', value)} required>
                     <SelectTrigger>
                       <SelectValue placeholder="Select Church" />
                     </SelectTrigger>
@@ -224,8 +237,8 @@ const LeadershipApplication = () => {
                 </div>
                 
                 <div>
-                  <Label htmlFor="zone">Zone *</Label>
-                  <Select onValueChange={(value) => handleInputChange('zone', value)}>
+                  <Label htmlFor="zone">Zone <span className='text-red-600 font-bold'>*</span></Label>
+                  <Select value={formData.zone} onValueChange={(value) => handleInputChange('zone', value)} required>
                     <SelectTrigger>
                       <SelectValue placeholder="Select Zone" />
                     </SelectTrigger>
@@ -267,7 +280,7 @@ const LeadershipApplication = () => {
               
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <Label htmlFor="occupation">Current Occupation *</Label>
+                  <Label htmlFor="occupation">Current Occupation <span className='text-red-600 font-bold'>*</span></Label>
                   <Input
                     id="occupation"
                     value={formData.occupation}
@@ -287,78 +300,23 @@ const LeadershipApplication = () => {
               </div>
             </div>
 
-            {/* Educational Background */}
-            <div className="bg-gray-50 p-6 rounded-lg">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Educational Background</h3>
-              
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <Label htmlFor="educationLevel">Highest Education Level *</Label>
-                  <Select onValueChange={(value) => handleInputChange('educationLevel', value)}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select education level" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="secondary">Secondary School</SelectItem>
-                      <SelectItem value="diploma">Diploma</SelectItem>
-                      <SelectItem value="bachelor">Bachelor's Degree</SelectItem>
-                      <SelectItem value="master">Master's Degree</SelectItem>
-                      <SelectItem value="phd">PhD</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                
-                <div>
-                  <Label htmlFor="fieldOfStudy">Field of Study *</Label>
-                  <Input
-                    id="fieldOfStudy"
-                    value={formData.fieldOfStudy}
-                    onChange={(e) => handleInputChange('fieldOfStudy', e.target.value)}
-                    required
-                  />
-                </div>
-                
-                <div>
-                  <Label htmlFor="institution">Institution *</Label>
-                  <Input
-                    id="institution"
-                    value={formData.institution}
-                    onChange={(e) => handleInputChange('institution', e.target.value)}
-                    required
-                  />
-                </div>
-                
-                <div>
-                  <Label htmlFor="graduationYear">Graduation Year *</Label>
-                  <Input
-                    id="graduationYear"
-                    type="number"
-                    value={formData.graduationYear}
-                    onChange={(e) => handleInputChange('graduationYear', e.target.value)}
-                    required
-                  />
-                </div>
-              </div>
-            </div>
-
             {/* Leadership Experience */}
             <div className="bg-gray-50 p-6 rounded-lg">
               <h3 className="text-2xl font-bold text-gray-900 mb-6">Leadership & Expectations</h3>
               
               <div className="space-y-6">
                 <div>
-                  <Label htmlFor="leadershipExperience">Previous Leadership Experience *</Label>
+                  <Label htmlFor="leadershipExperience">Previous Leadership Experience</Label>
                   <Textarea
                     id="leadershipExperience"
                     placeholder="Describe your leadership roles and experiences"
                     value={formData.leadershipExperience}
                     onChange={(e) => handleInputChange('leadershipExperience', e.target.value)}
-                    required
                   />
                 </div>
                 
                 <div>
-                  <Label htmlFor="expectations">What are your expectations from this program? *</Label>
+                  <Label htmlFor="expectations">What are your expectations from this program? <span className='text-red-600 font-bold'>*</span></Label>
                   <Textarea
                     id="expectations"
                     value={formData.expectations}
@@ -368,8 +326,8 @@ const LeadershipApplication = () => {
                 </div>
 
                 <div>
-                  <Label htmlFor="hearAbout">How did you hear about this program? *</Label>
-                  <Select onValueChange={(value) => handleInputChange('hearAbout', value)}>
+                  <Label htmlFor="hearAbout">How did you hear about this program? <span className='text-red-600 font-bold'>*</span></Label>
+                  <Select value={formData.hearAbout} onValueChange={(value) => handleInputChange('hearAbout', value)} required>
                     <SelectTrigger>
                       <SelectValue placeholder="Select option" />
                     </SelectTrigger>
@@ -420,7 +378,7 @@ const SuccessModal = ({ onClose }: { onClose: () => void }) => (
         </h2>
         
         <p className="text-gray-600 mb-6 leading-relaxed">
-          Thank you for applying to our Leadership Academy. We have received your application and will review it shortly. You will receive a confirmation email with next steps.
+          Thank you for applying to our Leadership Academy. We have received your application and will review it shortly. You will receive a confirmation email with next steps. Blessings!
         </p>
         
         <Button 
