@@ -47,9 +47,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
     return createUserWithEmailAndPassword(auth, email, password);
   }
 
-  // function logout(): Promise<void> {
-  //   return signOut(auth);
-  // }
 
   const logout = async () => {
     try {

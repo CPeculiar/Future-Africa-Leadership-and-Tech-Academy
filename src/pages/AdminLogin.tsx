@@ -16,7 +16,7 @@ const AdminLogin: React.FC = () => {
   const location = useLocation();
   
   // Get the intended destination or default to /admin
-  const from = (location.state as any)?.from?.pathname || '/admin';
+  const from = (location.state as any)?.from?.pathname || '/admin/dashboard';
 
   useEffect(() => {
     // If user is already logged in, redirect to admin dashboard

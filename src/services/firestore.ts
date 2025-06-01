@@ -43,8 +43,6 @@ interface ApplicationWithId extends ApplicationData {
   submittedAt: Date;
 }
 
-
-
 export const submitApplication = async (formData: ApplicationData): Promise<string> => {
   try {
     const docRef: DocumentReference = await addDoc(collection(db, "applications"), {

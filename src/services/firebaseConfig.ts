@@ -25,8 +25,6 @@ const firebaseConfig: FirebaseConfig = {
   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
-console.log("Firebase Config:", firebaseConfig);
-
 // Initialize Firebase
 const app: FirebaseApp = initializeApp(firebaseConfig);
 const analytics: Analytics = getAnalytics(app);
@@ -35,9 +33,5 @@ export const auth: Auth = getAuth(app);
 export const db: Firestore = getFirestore(app);
 export const functions: Functions = getFunctions(app);
 export const storage: FirebaseStorage = getStorage(app);
-
-console.log("Firebase successfully initialized");
-console.log("Firebase initialized:", app);
-console.log("Firestore instance:", db);
 
 export default app;
