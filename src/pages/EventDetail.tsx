@@ -113,12 +113,12 @@ const EventDetail = () => {
             {/* Main Content */}
             <div className="lg:col-span-2 space-y-8">
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">About This Event</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-4 text-center">About This Event</h2>
                 <p className="text-gray-600 leading-relaxed text-justify">{event.fullDescription}</p>
               </div>
 
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">Event Agenda</h2>
+                <h2 className="text-2xl font-bold text-gray-900 mb-4 text-center">Event Agenda</h2>
                 <div className="bg-gray-50 rounded-lg p-6">
                   <ul className="space-y-3">
                     {event.agenda.map((item, index) => (
