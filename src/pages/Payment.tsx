@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, CreditCard, Shield, CheckCircle } from 'lucide-react';
 import { PaystackButton } from 'react-paystack';
 import { Button } from '@/components/ui/button';
+import IMG from '/FALATA.jpg'
 
 interface PaymentData {
   customer_name: string;
@@ -270,7 +271,7 @@ const paystackConfig = {
           </Button>
           
           <img 
-            src="/src/assets/images/FALATA.jpg" 
+            src={IMG}
             alt="FALATA Logo" 
             className="w-16 h-16 mx-auto mb-4 rounded-lg"
           />
