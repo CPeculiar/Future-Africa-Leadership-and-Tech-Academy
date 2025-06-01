@@ -23,10 +23,10 @@ const Index = () => {
 
   const missionImages = [
     { src: aboutIMG1, alt: "Leadership Team" },
-    { src: aboutIMG3, alt: "2022 Graduation set" },
-    { src: aboutIMG5, alt: "2022 Graduating Students" },
-    { src: aboutIMG2, alt: "2023 Graduation set" },
-    { src: aboutIMG6, alt: "Collaborations" },
+    { src: aboutIMG3, alt: "Graduating Students" },
+    { src: aboutIMG5, alt: "Graduating Students" },
+    { src: aboutIMG2, alt: "Graduating Students" },
+    { src: aboutIMG6, alt: "Team work" },
     { src: aboutIMG4, alt: "Tech brainstorming" },
   ];
 
@@ -79,7 +79,8 @@ const Index = () => {
             <div className="text-center lg:text-left space-y-6 sm:space-y-8">
               <div className="inline-flex items-center bg-gradient-to-r from-yellow-400/20 to-orange-400/20 rounded-full px-4 sm:px-6 py-2 text-xs sm:text-sm font-medium text-yellow-300 border border-yellow-400/30">
                 <Star className="w-4 h-4 mr-2" />
-                Africa's Premier Leadership & Tech Academy
+                Future Africa Leadership & Tech Academy
+                {/* Africa's Premier Leadership & Tech Academy */}
               </div>
               
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight">
@@ -278,7 +279,7 @@ const Index = () => {
               
               <div className="grid grid-cols-2 gap-6 sm:gap-8">
                 <div className="text-center lg:text-left">
-                  <div className="text-2xl sm:text-3xl font-bold text-yellow-400">8+</div>
+                  <div className="text-2xl sm:text-3xl font-bold text-yellow-400">2+</div>
                   <div className="text-slate-400 text-sm sm:text-base">Years Experience</div>
                 </div>
                 <div className="text-center lg:text-left">
