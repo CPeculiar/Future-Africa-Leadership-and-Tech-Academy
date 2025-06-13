@@ -11,7 +11,7 @@ const CountdownTimer = () => {
   });
 
   useEffect(() => {
-    const targetDate = new Date('2025-06-15T00:00:00').getTime();
+    const targetDate = new Date('2025-06-30T00:00:00').getTime();
 
     const updateCountdown = () => {
       const now = new Date().getTime();
@@ -40,7 +40,7 @@ const CountdownTimer = () => {
       <div className="flex items-center justify-center mb-3 sm:mb-4">
         <Clock className="w-8 h-4 sm:w-5 sm:h-5 mr-2 animate-pulse" />
         <h3 className="text-sm sm:text-lg font-bold text-center">
-          Applications for the June 2025 Cohort will close on 15th June!
+          Applications for the June 2025 Cohort will close on 30th June!
         </h3>
       </div>
       
